@@ -28,21 +28,29 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="contact_info">
-                        <div class="info_item">
+                        <div class="info_item mb-3">
                             <i class="lnr lnr-home"></i>
-                            <h6>California, United States</h6>
-                            <p>Santa monica bullevard</p>
+                            <h6>AIT InstituteI<br>
+                                Kumarakanda<br>
+                                Dodanduwa<br></h6>
+                            {{-- <p>Santa monica bullevard</p> --}}
                         </div>
-                        <div class="info_item">
+                        <div class="info_item mb-3">
                             <i class="lnr lnr-phone-handset"></i>
-                            <h6><a href="#">00 (440) 9865 562</a></h6>
-                            <p>Mon to Fri 9am to 6 pm</p>
+                            <h6><a href="#">Tel.: +94 077 068 3621</a></h6>
+                            {{-- <p>Mon to Fri 9am to 6 pm</p> --}}
                         </div>
                         <div class="info_item">
                             <i class="lnr lnr-envelope"></i>
-                            <h6><a href="#">support@colorlib.com</a></h6>
-                            <p>Send us your query anytime!</p>
+                            <h6><a href="#">academyit@gmail.com</a></h6>
+                            {{-- <p>Send us your suggetion anytime!</p> --}}
                         </div>
+                        <div class="info_item">
+                            <i class="lnr lnr-envelope"></i>
+                            <h6><a href="#">nadith_manawadu@yahoo.com</a></h6>
+                            {{-- <p>Send us your suggetion anytime!</p> --}}
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-9">

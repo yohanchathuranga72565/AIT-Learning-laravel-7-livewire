@@ -25,21 +25,21 @@
 		<div class="header-top">
 			<div class="container">
 				<div class="row align-items-center">
-					<div class="col-lg-6 col-sm-6 col-4 header-top-left">
+					<div class="col-lg-8 col-sm-8 col-4 header-top-left">
 						<a href="tel:+9530123654896">
 							<span class="lnr lnr-phone"></span>
 							<span class="text">
-								<span class="text">+953012 3654 896</span>
+								<span class="text">+94 077 068 3621</span>
 							</span>
 						</a>
 						<a href="mailto:support@colorlib.com">
 							<span class="lnr lnr-envelope"></span>
 							<span class="text">
-								<span class="text">support@colorlib.com</span>
+                                <span class="text">academyit@gmail.com</span>
 							</span>
-						</a>
+                        </a>
 					</div>
-					<div class="col-lg-6 col-sm-6 col-8 header-top-right">
+					<div class="col-lg-4 col-sm-4 col-8 header-top-right">
                         @guest
                             <a href="{{ route('login') }}" class="text-uppercase">Login</a>
                             @if (Route::has('register'))
@@ -106,18 +106,20 @@
                         <li><a href ="{{route('home.contact')}}">Contact</a></li>
                     </ul>
 				</div>
-				<div class="col-lg-2 col-md-6 single-footer-widget">
+				<div class="col-lg-4 col-md-6 single-footer-widget">
                     <h2 class="text-white">Location</h2>
                     <address class="address">
-                        121, Clear Water Bay Road<br>
-                        Clear Water Bay, Kowloon<br>
-                        HONG KONG<br>
-                        <i class="fa fa-phone fa-lg"></i> Tel.: +852 1234 5678<br>
-                        <i class="fa fa-fax fa-lg"></i> Fax: +852 8765 4321<br>
-                        <i class="fa fa-envelope fa-lg"></i> Email: <a href="mailto:confusion@food.net">confusion@food.net</a>
+                        AIT InstituteI,<br>
+                        Kumarakanda<br>
+                        Dodanduwa<br>
+                        <i class="fa fa-phone fa-lg"></i> Tel.: +94 077 068 3621<br>
+                        {{-- <i class="fa fa-fax fa-lg"></i> Fax: +852 8765 4321<br> --}}
+                        <i class="fa fa-envelope fa-lg"></i> Email: <a href="mailto:confusion@food.net">academyit@gmail.com</a><br>
+                        <i class="fa fa-envelope fa-lg"></i> Email: <a href="mailto:confusion@food.net">nadith_manawadu@yahoo.com</a>
+
                      </address>
 				</div>
-				<div class="col-lg-8 col-md-12 single-footer-widget">
+				<div class="col-lg-6 col-md-12 single-footer-widget">
                     <iframe src="https://www.google.com/maps/d/u/0/embed?mid=18lxxp05IH8Upok9t_mhCCctDUC9KxQNr" width="100%" height="300"></iframe>
 				</div>
 
@@ -137,7 +139,8 @@
 	<!--================ End footer Area  =================-->
 
 	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{asset('css/app.js') }}"></script>
 	<script src="{{asset('homePages/js/jquery-3.2.1.min.js')}}"></script>
 	<script src="{{asset('homePages/js/popper.js')}}"></script>
 	<script src="{{asset('homePages/js/bootstrap.min.js')}}"></script>
