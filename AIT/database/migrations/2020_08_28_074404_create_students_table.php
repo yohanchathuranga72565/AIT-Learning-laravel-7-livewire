@@ -24,6 +24,7 @@ class CreateStudentsTable extends Migration
             $table->integer('age');
             $table->integer('phone_number');
             $table->string('grade');
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }

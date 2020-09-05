@@ -55,7 +55,28 @@
             </div>
             <div class="row">
                 <!-- single-instructor -->
-                <div class="col-lg-3 col-sm-6">
+                @foreach ($teachers as $teacher)
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_instructor">
+                            <div class="author">
+                                <img src="{{asset('storage/profileImages/'.$teacher->profile_image)}}" alt="" width ='163' height='163'>
+                            </div>
+                            <div class="author_decs">
+                                <h4>Ethel Davis</h4>
+                                <p class="profession">Sr. Faculty Data Science</p>
+                                <p>If you are looking at blank cassettes on the web, you may be very confused at the
+                                    difference in price.</p>
+                                <div class="social_icons">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                {{-- <div class="col-lg-3 col-sm-6">
                     <div class="single_instructor">
                         <div class="author">
                             <img src="{{asset('homePages/img/instructors/ins1.jpg')}}" alt="">
@@ -72,8 +93,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- single-instructor -->
+                </div> --}}
+                
+                {{-- <!-- single-instructor -->
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_instructor">
                         <div class="author">
@@ -129,7 +151,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

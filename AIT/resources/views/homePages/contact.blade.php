@@ -30,14 +30,14 @@
                     <div class="contact_info">
                         <div class="info_item mb-3">
                             <i class="lnr lnr-home"></i>
-                            <h6>AIT InstituteI<br>
+                            <h6>AIT Institute<br>
                                 Kumarakanda<br>
                                 Dodanduwa<br></h6>
                             {{-- <p>Santa monica bullevard</p> --}}
                         </div>
                         <div class="info_item mb-3">
                             <i class="lnr lnr-phone-handset"></i>
-                            <h6><a href="#">Tel.: +94 077 068 3621</a></h6>
+                            <h6><a href="#">Tel.: +94 77 068 3621</a></h6>
                             {{-- <p>Mon to Fri 9am to 6 pm</p> --}}
                         </div>
                         <div class="info_item">

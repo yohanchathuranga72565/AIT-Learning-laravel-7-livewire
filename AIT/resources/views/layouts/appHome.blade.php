@@ -5,7 +5,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="img/favicon.png" type="image/png">
+	<link rel="icon" href="{{asset('homePages/img/favicon.png')}}" type="image/png">
 	<title>AIT Institute</title>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{asset('css/app.css') }}">
@@ -29,7 +29,7 @@
 						<a href="tel:+9530123654896">
 							<span class="lnr lnr-phone"></span>
 							<span class="text">
-								<span class="text">+94 077 068 3621</span>
+								<span class="text">+94 77 068 3621</span>
 							</span>
 						</a>
 						<a href="mailto:support@colorlib.com">
@@ -50,17 +50,17 @@
                                 <div id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </div>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <div class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
-                                </div>
+                                	</div>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>
+									</form>
+									
                                 </div>
                             </div>
                         @endguest
@@ -73,7 +73,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="{{route('home.home')}}"><img src="{{asset('homePages/img/logo.png')}}" alt=""></a>
+					<a class="navbar-brand logo_h" href="{{route('home.home')}}"><img src="{{asset('homePages/img/AITlogo.png')}}" alt=""></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
@@ -86,6 +86,20 @@
                             <li class="nav-item @if(session()->has('home')) active @endif"><a class="nav-link" href="{{route('home.home')}}">Home</a></li>
 							<li class="nav-item @if(session()->has('about')) active @endif"><a class="nav-link" href="{{route('home.about')}}">About</a></li>
 							<li class="nav-item @if(session()->has('contact')) active @endif"><a class="nav-link" href="{{route('home.contact')}}">Contact</a></li>
+							@auth
+								@if (Auth::user()->isA('student'))
+									<li class="nav-item"><a class="nav-link" href="{{route('student.index')}}">Dashboard</a></li>
+								@endif
+								@if (Auth::user()->isA('administrator'))
+									<li class="nav-item"><a class="nav-link" href="{{route('admin.index')}}">Dashboard</a></li>
+								@endif
+								@if (Auth::user()->isA('parent'))
+									<li class="nav-item"><a class="nav-link" href="{{route('parent.index')}}">Dashboard</a></li>
+								@endif
+								@if (Auth::user()->isA('teacher'))
+									<li class="nav-item"><a class="nav-link" href="{{route('teacher.index')}}">Dashboard</a></li>
+								@endif
+							@endauth
 						</ul>
 					</div>
 				</div>
@@ -95,6 +109,7 @@
 	<!--================ End Header Menu Area =================-->
     @yield('contents')
 	<!--================ Start footer Area  =================-->
+	<hr>
 	<footer class="footer-area section_gap">
 		<div class="container">
 			<div class="row">
@@ -107,12 +122,12 @@
                     </ul>
 				</div>
 				<div class="col-lg-4 col-md-6 single-footer-widget">
-                    <h2 class="text-white">Location</h2>
+                    <h2  class="text-white">Location</h2>
                     <address class="address">
-                        AIT InstituteI,<br>
+                        AIT Institute,<br>
                         Kumarakanda<br>
                         Dodanduwa<br>
-                        <i class="fa fa-phone fa-lg"></i> Tel.: +94 077 068 3621<br>
+                        <i class="fa fa-phone fa-lg"></i> Tel.: +94 77 068 3621<br>
                         {{-- <i class="fa fa-fax fa-lg"></i> Fax: +852 8765 4321<br> --}}
                         <i class="fa fa-envelope fa-lg"></i> Email: <a href="mailto:confusion@food.net">academyit@gmail.com</a><br>
                         <i class="fa fa-envelope fa-lg"></i> Email: <a href="mailto:confusion@food.net">nadith_manawadu@yahoo.com</a>

@@ -25,7 +25,15 @@ Route::post('/send-email','HomePages\ContactController@sendEmail' )->name('conta
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin', 'Admin\AdminController@index')->name('admin');
-Route::get('/teacher', 'Teacher\TeacherController@index')->name('teacher');
-Route::get('/student', 'Student\StudentController@index')->name('student');
-Route::get('/parent', 'Parent\ParentController@index')->name('parent');
+Route::resource('admin', 'Admin\AdminController');
+Route::post('/adminProfileUpload','Admin\AdminController@profileUpload')->name('adminProfileUpload');
+
+
+Route::resource('teacher', 'Teacher\TeacherController');
+Route::post('/teacherProfileUpload','Teacher\TeacherController@profileUpload')->name('teacherProfileUpload');
+
+Route::resource('student', 'Student\StudentController');
+Route::post('/studentProfileUpload','Student\StudentController@profileUpload')->name('studentProfileUpload');
+
+Route::resource('parent', 'Parent\ParentController');
+Route::post('/parentProfileUpload','Parent\ParentController@profileUpload')->name('parentProfileUpload');

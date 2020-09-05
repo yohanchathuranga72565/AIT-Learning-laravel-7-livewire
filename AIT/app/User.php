@@ -12,6 +12,7 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,5 +43,20 @@ class User extends Authenticatable
     public function student()
     {
         return $this->hasOne('App\Student');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne('App\Admin');
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne('App\Teacher');
+    }
+
+    public function parent()
+    {
+        return $this->hasOne('App\Parent_');
     }
 }
