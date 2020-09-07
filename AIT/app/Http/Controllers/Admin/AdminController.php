@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\User;
+use App\Admin;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -52,7 +53,8 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $admin = Admin::find($id);
+        return view('admin.profileDetails')->with(['admin'=>$admin]);
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Teacher;
 use App\User;
+use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
@@ -20,7 +22,12 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.index');
+        if(Auth::user()->isA('student')){
+            return view('teacher.index');
+        }
+        else{
+            return redirect(route('login'));
+        }
     }
 
     /**
@@ -30,6 +37,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
+
         return view('teacher.teacherRegister');
     }
 
@@ -78,7 +86,8 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        //
+        $teacher = Teacher::find($id);
+        return view('teacher.profileDetails')->with(['teacher'=>$teacher]);
     }
 
     /**
@@ -157,5 +166,10 @@ class TeacherController extends Controller
             auth()->user()->teacher()->update(['profile_image'=> $filename]);
             return redirect()->back();
         }
+    }
+
+    public function getAllDetails(){
+        $teachers = Teacher::all();
+        return view('teacher.allTeacherDetails')->with(['teachers'=>$teachers]);
     }
 }

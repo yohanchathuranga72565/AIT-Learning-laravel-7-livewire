@@ -120,6 +120,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           @if (Auth::user()->isA('administrator'))
+
             @if (Auth::user()->admin->profile_image)
               <div class="image">
                 <img src="{{asset('storage/profileImages/'.Auth::user()->admin->profile_image)}}" class="img-circle elevation-2" alt="User Image">
@@ -129,7 +130,12 @@
                 <img src="{{asset('storage/profileImages/profile.png')}}" class="img-circle elevation-2" alt="User Image">
               </div>
             @endif
+            <div class="info">
+              <a href="{{ route('admin.show',Auth::user()->admin->id) }}" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
+
           @elseif (Auth::user()->isA('teacher'))
+
             @if (Auth::user()->teacher->profile_image)
               <div class="image">
                 <img src="{{asset('storage/profileImages/'.Auth::user()->teacher->profile_image)}}" class="img-circle elevation-2" alt="User Image" >
@@ -139,7 +145,12 @@
                 <img src="{{asset('storage/profileImages/profile.png')}}" class="img-circle elevation-2" alt="User Image">
               </div>
             @endif
+            <div class="info">
+              <a href="{{ route('teacher.show',Auth::user()->teacher->id) }}" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
+
           @elseif (Auth::user()->isA('student'))
+
             @if (Auth::user()->student->profile_image)
               <div class="image">
                 <img src="{{asset('storage/profileImages/'.Auth::user()->student->profile_image)}}" class="img-circle elevation-2" alt="User Image">
@@ -149,7 +160,12 @@
                 <img src="{{asset('storage/profileImages/profile.png')}}" class="img-circle elevation-2" alt="User Image">
               </div>
             @endif
+            <div class="info">
+              <a href="{{ route('student.show',Auth::user()->student->id) }}" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
+
           @elseif (Auth::user()->isA('parent'))
+
             @if (Auth::user()->parent->profile_image)
               <div class="image">
                 <img src="{{asset('storage/profileImages/'.Auth::user()->parent->profile_image)}}" class="img-circle elevation-2" alt="User Image">
@@ -159,11 +175,11 @@
                 <img src="{{asset('storage/profileImages/profile.png')}}" class="img-circle elevation-2" alt="User Image">
               </div>
             @endif
+            <div class="info">
+              <a href="{{ route('parent.show',Auth::user()->parent->id) }}" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
             
           @endif
-          <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-          </div>
         </div>
 
         <!-- Sidebar Menu -->
@@ -194,7 +210,8 @@
                 </li>
 
               @if (Auth::user()->isAn('administrator'))
-                <li class="nav-item has-treeview">
+                {{-- profile creation menu --}}
+                {{-- <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                       <i class="fa fa-user-plus" aria-hidden="true"></i>
                       <p class="pl-1">
@@ -219,6 +236,36 @@
                       <a href="{{route('parent.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Create Parent Account</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li> --}}
+                {{-- account managment menu --}}
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <p class="pl-1">
+                          Account managment
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="{{ route('parentGetAllDetails') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Parent</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="{{ route('studentGetAllDetails') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Student</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{ route('teacherGetAllDetails') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Teacher</p>
                       </a>
                     </li>
                   </ul>

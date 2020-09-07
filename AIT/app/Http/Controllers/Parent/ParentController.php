@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Parent;
 use App\User;
+use App\Parent_;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ParentController extends Controller
@@ -20,7 +22,12 @@ class ParentController extends Controller
      */
     public function index()
     {
-        return view('parent.index');
+        if(Auth::user()->isA('student')){
+            return view('parent.index');
+        }
+        else{
+            return redirect(route('login'));
+        }
     }
 
     /**
@@ -80,7 +87,8 @@ class ParentController extends Controller
      */
     public function show($id)
     {
-        //
+        $parent = Parent_::find($id);
+        return view('parent.profileDetails')->with(['parent'=>$parent]);
     }
 
     /**
@@ -161,6 +169,11 @@ class ParentController extends Controller
             auth()->user()->parent()->update(['profile_image'=> $filename]);
             return redirect()->back();
         }
+    }
+    
+    public function getAllDetails(){
+        $parents = Parent_::all();
+        return view('parent.allParentDetails')->with(['parents'=>$parents]);
     }
 
 }

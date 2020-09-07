@@ -31,9 +31,12 @@ Route::post('/adminProfileUpload','Admin\AdminController@profileUpload')->name('
 
 Route::resource('teacher', 'Teacher\TeacherController');
 Route::post('/teacherProfileUpload','Teacher\TeacherController@profileUpload')->name('teacherProfileUpload');
+Route::get('/allTeacherDetails','Teacher\TeacherController@getAllDetails')->name('teacherGetAllDetails');
 
 Route::resource('student', 'Student\StudentController');
 Route::post('/studentProfileUpload','Student\StudentController@profileUpload')->name('studentProfileUpload');
+Route::get('/allStudentDetails','Student\StudentController@getAllDetails')->name('studentGetAllDetails');
 
 Route::resource('parent', 'Parent\ParentController');
 Route::post('/parentProfileUpload','Parent\ParentController@profileUpload')->name('parentProfileUpload');
+Route::get('/allParentDetails','Parent\ParentController@getAllDetails')->name('parentGetAllDetails');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Student;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Student;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
@@ -20,7 +22,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.index');
+        if(Auth::user()->isA('student')){
+            return view('student.index');
+        }
+        else{
+            return redirect(route('login'));
+        }
+       
     }
 
     /**
@@ -32,6 +40,7 @@ class StudentController extends Controller
     {
         return view('student.studentRegister');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,7 +89,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('student.profileDetails')->with(['student'=>$student]);
     }
 
     /**
@@ -159,5 +169,10 @@ class StudentController extends Controller
             auth()->user()->student()->update(['profile_image'=> $filename]);
             return redirect()->back();
         }
+    }
+
+    public function getAllDetails(){
+        $students = Student::all();
+        return view('student.allStudentDetails')->with(['students'=>$students]);
     }
 }

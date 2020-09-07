@@ -14,4 +14,9 @@ class Parent_ extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function student()
+    {
+        return $this->hasMany('App\Student');
+    }
 }

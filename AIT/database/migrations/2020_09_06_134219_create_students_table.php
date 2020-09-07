@@ -17,6 +17,8 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('parent__id')->nullable();
+            $table->foreign('parent__id')->references('id')->on('parent_s');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('address');
