@@ -28,9 +28,11 @@
   <link rel="stylesheet" href="{{asset('adminPanel/plugins/summernote/summernote-bs4.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <!-- Edit profile start -->
+
   @if (Auth::user()->isA('administrator'))
     @include('admin.editProfile')
     @include('admin.editImage')
@@ -40,6 +42,7 @@
   @elseif(Auth::user()->isA('parent'))
     @include('parent.editProfile')
     @include('parent.editImage')
+    @include('parent.linkStudentAcc')
   @elseif(Auth::user()->isA('teacher'))
     @include('teacher.editProfile')
     @include('teacher.editImage')
@@ -208,6 +211,23 @@
                     <p>Dashboard</p>
                   </a>
                 </li>
+                
+                @if (Auth::user()->isA('parent'))
+                  <li class='nav-item'>
+                    <a href="#" class='nav-link' data-toggle="modal" data-target="#linkStudentAcc">
+                      <i class="nav-icon fa fa-link" aria-hidden="true"></i>
+                      <p>Link your child</p>
+                    </a>
+                  </li>
+                  <li class='nav-item'>
+                    <a href="{{ route('getLinkedStudent',Auth::user()->parent->id) }}" class='nav-link'>
+                      <i class="nav-icon fa fa-book" aria-hidden="true"></i>
+                      <p>Child reports and Payments</p>
+                    </a>
+                  </li>
+            
+                @endif
+                
 
               @if (Auth::user()->isAn('administrator'))
                 {{-- profile creation menu --}}
@@ -280,7 +300,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      @yield('contents')
+      @yield('content')
     </div>
     <!-- /.content-wrapper -->
     {{-- <footer class="main-footer">
@@ -307,6 +327,7 @@
     <!-- /.control-sidebar -->
   </div>
 <!-- ./wrapper -->
+
 
 <!-- jQuery -->
 <script src="{{asset('adminPanel/plugins/jquery/jquery.min.js')}}"></script>
@@ -338,5 +359,8 @@
 <script src="{{asset('adminPanel/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminPanel/dist/js/adminlte.js')}}"></script>
+@livewireScripts
+
+
 </body>
 </html>

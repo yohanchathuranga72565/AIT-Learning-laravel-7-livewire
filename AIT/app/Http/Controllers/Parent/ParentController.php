@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Parent;
 use App\User;
 use App\Parent_;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class ParentController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->isA('student')){
+        if(Auth::user()->isA('parent')){
             return view('parent.index');
         }
         else{
@@ -174,6 +175,16 @@ class ParentController extends Controller
     public function getAllDetails(){
         $parents = Parent_::all();
         return view('parent.allParentDetails')->with(['parents'=>$parents]);
+    }
+
+    public function linkStudent($id){
+        Student::where('id',$id)->update(['parent__id'=>auth()->user()->parent->id]);
+        return redirect(route('getLinkedStudent'));
+    }
+
+    public function getLinkedStudent($id){
+        $students = Parent_::find($id)->student;
+        return view('parent.linkedStudentList')->with(['students'=>$students]);
     }
 
 }

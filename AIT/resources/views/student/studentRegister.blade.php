@@ -1,6 +1,6 @@
-@extends('layouts.appAdminDashboard')
+@extends('layouts.app')
 
-@section('contents')
+@section('content')
 <!--================Register Area =================-->
 <div class="container mb-5 mt-5">
     <div class="row justify-content-center">

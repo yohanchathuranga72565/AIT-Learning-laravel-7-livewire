@@ -75,7 +75,7 @@
                         <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{Auth::user()->student->gender}}" readonly required autocomplete="pno">
             
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="form-group row">
                         <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>

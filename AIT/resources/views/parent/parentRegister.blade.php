@@ -1,6 +1,6 @@
-@extends('layouts.appAdminDashboard')
+@extends('layouts.app')
 
-@section('contents')
+@section('content')
 <!--================Register Area =================-->
 <div class="container mb-5 mt-5">
     <div class="row justify-content-center">
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address(Parent)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -39,7 +39,7 @@
                                 @enderror
                             </div>
                         </div>
-
+ 
                         <div class="form-group row">
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
