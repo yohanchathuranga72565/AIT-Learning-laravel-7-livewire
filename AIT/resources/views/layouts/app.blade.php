@@ -7,7 +7,6 @@
   <title>AIT Institute | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{asset('css/app.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('adminPanel/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
@@ -28,6 +27,8 @@
   <link rel="stylesheet" href="{{asset('adminPanel/plugins/summernote/summernote-bs4.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{asset('css/app.css') }}">
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -290,6 +291,14 @@
                     </li>
                   </ul>
                 </li>
+                @endif
+                @if (Auth::user()->isA('student|teacher'))
+                  <li class='nav-item'>
+                    <a href="{{ route('comments') }}" class="nav-link">
+                      <i class="nav-icon fa fa-comment" aria-hidden="true"></i>
+                      <p>Comment Section</p>
+                    </a>
+                  </li>
                 @endif
           </ul> 
         </nav>

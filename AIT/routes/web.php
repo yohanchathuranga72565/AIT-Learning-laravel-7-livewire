@@ -40,3 +40,5 @@ Route::get('/allParentDetails','Parent\ParentController@getAllDetails')->name('p
 Route::get('/linkStudentToParent/{id}','Parent\ParentController@linkStudent')->name('linkStudent');
 Route::get('/linkedStudentList/{id}','Parent\ParentController@getLinkedStudent')->name('getLinkedStudent');
 
+Route::get('/comments','ChatSystem\CommentController@index')->name('comments');
+
