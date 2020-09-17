@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Question extends Model
 {
     protected $guarded = [];
 
@@ -13,8 +13,8 @@ class Comment extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function question()
+    public function comment()
     {
-        return $this->belongsTo('App\Question');
+        return $this->hasMany('App\Comment');
     }
 }

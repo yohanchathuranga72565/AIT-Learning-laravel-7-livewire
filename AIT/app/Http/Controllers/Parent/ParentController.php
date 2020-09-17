@@ -179,7 +179,7 @@ class ParentController extends Controller
 
     public function linkStudent($id){
         Student::where('id',$id)->update(['parent__id'=>auth()->user()->parent->id]);
-        return redirect(route('getLinkedStudent'));
+        return redirect(route('getLinkedStudent',auth()->user()->parent->id));
     }
 
     public function getLinkedStudent($id){

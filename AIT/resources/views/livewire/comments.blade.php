@@ -1,8 +1,13 @@
 <div class="d-flex justify-content-center">
-    <div class="col-6">
+    <div class="col-12">
         <h1 class="py-3">Comments</h1>
         {{-- {{ $error }} --}}
         @error('newComment')
+            <span class="error text-danger">
+                <p>{{ $message }}</p>
+            </span>
+        @enderror
+        @error('image')
             <span class="error text-danger">
                 <p>{{ $message }}</p>
             </span>
@@ -18,14 +23,27 @@
                 </div>
             @endif
         </div>
-        <form class="d-flex my-1" wire:submit.prevent='addComment'>
-            <input type="text" class="form-control my-2 p-2 @error('newComment') is-invalid @enderror" placeholder="What's in your mind." wire:model.debounce.500ms="newComment">
-            <div class="p-2">
-                <button type='submit' class="btn btn-primary">
-                    Add
-                </button>
-            </div>
-        </form>
+        @if ($image)
+            <img src="{{ $image->temporaryUrl() }}" class="mb-1" width="200">
+        @endif
+        <div wire:loading wire:target="image"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+        
+        @if ($active)
+            <form class="my-1" wire:submit.prevent='addComment'>
+                <button class="btn btn-sm btn-primary" onclick="document.getElementById('file').click(); return false;">Add Image</button>
+                <input type="file" id="file"  class = "d-none @error('image') is-invalid @enderror" id="image" wire:model.debounce.500ms="image">
+                
+                <div class="d-flex my-1">
+                    <input type="text" class="form-control my-2 p-2 @error('newComment') is-invalid @enderror" placeholder="What's in your mind." wire:model.debounce.500ms="newComment">
+                    <div class="p-2">
+                        <button type='submit' class="btn btn-primary">
+                            Add
+                        </button>
+                    </div>
+                </div> 
+            </form> 
+        @endif
+        
         
         @foreach ($comments as $comment)
             <div class="card my-1">
@@ -91,6 +109,9 @@
                     <p>
                         {{ $comment->body }}
                     </p> 
+                    @if ($comment->image)
+                        <img src="{{asset('storage/comment_images/'.$comment->image)}}" width="500" class="img-fluid rounded mx-auto d-block">
+                    @endif
                 </div>
             </div>
         @endforeach
