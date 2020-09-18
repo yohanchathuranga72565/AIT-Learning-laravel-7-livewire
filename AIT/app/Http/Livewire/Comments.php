@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Rules\ImageValidationWithNull;
 use Illuminate\Support\Facades\Storage;
 
 class Comments extends Component
@@ -16,9 +17,10 @@ class Comments extends Component
     use WithPagination;
     use WithFileUploads;
     public $newComment;
-    public $image;
+    public $imagec;
     public $questionId;
     public $active;
+    public $extension;
 
     // public function mount(){
     //     $initialComments = Comment::latest()->paginate(2);
@@ -26,6 +28,7 @@ class Comments extends Component
     // }
 
     protected $listeners = ['questionSelected'];
+
 
     public function questionSelected($questionId){
         $this->questionId = $questionId;
@@ -39,7 +42,12 @@ class Comments extends Component
 
     public function updatedImage()
     {
-        $this->validate(['image' => 'max:10240']);
+        $filename = null;
+        if($this->imagec){
+            $filename = $this->imagec->getClientOriginalname();
+        }
+        
+        $this->validate(['imagec' => ['max:10240',new ImageValidationWithNull($filename)]]);
     }
 
     public function remove($commentId){
@@ -54,27 +62,31 @@ class Comments extends Component
     }
 
     public function addComment(){
-        $this->validate(['newComment'=> 'required',
-                         'image' => 'max:10240']);
+        $filename = null;
+        if($this->imagec){
+            $filename = $this->imagec->getClientOriginalname();
+        }
+        $this->validate(['newComment'=> ['required'],
+                         'imagec' => ['max:10240',new ImageValidationWithNull($filename)]]);
 
         $image = $this->storeImage();
         $createdComment = auth()->user()->comment()->create(['body'=>$this->newComment, 'image'=> $image, 'question_id'=> $this->questionId]);
         // $this->comments->push($createdComment);
 
         $this->newComment = "";
-        $this->image = NULL;
+        $this->imagec = NULL;
 
         session()->flash('message', 'Comment added successfully.');
         
     }
 
     public function storeImage(){
-        if(!$this->image){
+        if(!$this->imagec){
             return null;
         }
         
-            $filename = $this->image->getClientOriginalname();
-            $this->image->storeAs('public/comment_images',$filename);
+            $filename = $this->imagec->getClientOriginalname();
+            $this->imagec->storeAs('public/comment_images',$filename);
             return $filename;
         
     }

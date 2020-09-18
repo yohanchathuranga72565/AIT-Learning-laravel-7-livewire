@@ -22,7 +22,7 @@ class CreateParentSTable extends Migration
             $table->string('address');
             $table->string('gender');
             $table->string('occupation');
-            $table->integer('age');
+            $table->string('dob');
             $table->integer('phone_number');
             $table->string('profile_image')->nullable();
             $table->timestamps();

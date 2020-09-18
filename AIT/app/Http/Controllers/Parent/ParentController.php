@@ -52,7 +52,7 @@ class ParentController extends Controller
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'age'  => ['required', 'max:70' , 'numeric'],
+            'dob'  => ['required', 'date'],
             'gender' => ['required'],
             'occupation'  => ['required', 'string', 'max:100'],
             'address'  => ['required', 'string', 'max:255'],
@@ -71,7 +71,7 @@ class ParentController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'address' => $data['address'],
-            'age' => $data['age'],
+            'dob' => $data['dob'],
             'gender' => $data['gender'],
             'occupation' => $data['occupation'],
             'phone_number' => $data['pno'],
@@ -116,7 +116,7 @@ class ParentController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'occupation' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'age'  => ['required', 'max:70' , 'numeric'],
+            'dob'  => ['required', 'date'],
             'gender' => ['required'],
             'address'  => ['required', 'string', 'max:255'],
             'pno'  => ['required'],
@@ -134,7 +134,7 @@ class ParentController extends Controller
             'name' => $data['name'], 
             'address' => $data['address'], 
             'phone_number' => $data['pno'],
-            'age' => $data['age'],  
+            'dob' => $data['dob'],  
             'occupation' => $data['occupation'],
         ]);
 

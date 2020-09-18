@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="{{asset('homePages/img/favicon.png')}}" type="image/png">
 	<title>AIT Institute</title>
+	{{-- jquery --}}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{asset('css/app.css') }}">
 	<link rel="stylesheet" href="{{asset('homePages/vendors/linericon/style.css')}}">
@@ -167,6 +169,21 @@
 	<script src="{{asset('homePages/js/jquery.ajaxchimp.min.js')}}"></script>
 	<script src="{{asset('homePages/vendors/counter-up/jquery.counterup.js')}}"></script>
 	<script src="{{asset('homePages/js/mail-script.js')}}"></script>
+	{{-- jquery ui --}}
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$( function() {
+			$( "#dob" ).datepicker({
+			maxDate:new Date(),
+			showAnim:'drop',
+			dateFormat:'yy-mm-dd',
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "1970:2030",
+			});
+		} );
+	</script>
 </body>
 
 </html>

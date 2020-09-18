@@ -53,7 +53,7 @@ class StudentController extends Controller
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'age'  => ['required', 'max:70' , 'numeric'],
+            'dob'  => ['required', 'date'],
             'gender' => ['required'],
             'address'  => ['required', 'string', 'max:255'],
             'grade'  => ['required'],
@@ -72,7 +72,7 @@ class StudentController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'address' => $data['address'],
-            'age' => $data['age'],
+            'dob' => $data['dob'],
             'gender' => $data['gender'],
             'phone_number' => $data['pno'],
             'grade' => $data['grade'],
@@ -116,7 +116,7 @@ class StudentController extends Controller
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'age'  => ['required', 'max:70' , 'numeric'],
+            'dob'  => ['required', 'date'],
             'gender' => ['required'],
             'address'  => ['required', 'string', 'max:255'],
             'pno'  => ['required'],
@@ -134,7 +134,7 @@ class StudentController extends Controller
             'name' => $data['name'], 
             'address' => $data['address'], 
             'phone_number' => $data['pno'],
-            'age' => $data['age'],  
+            'dob' => $data['dob'],  
         ]);
 
         // $id->update(

@@ -23,7 +23,7 @@ class CreateStudentsTable extends Migration
             $table->string('email')->unique();
             $table->string('address');
             $table->string('gender');
-            $table->integer('age');
+            $table->string('dob');
             $table->integer('phone_number');
             $table->string('grade');
             $table->string('profile_image')->nullable();

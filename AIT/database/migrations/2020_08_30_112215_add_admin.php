@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+// use Carbon\Traits\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -26,7 +27,7 @@ class AddAdmin extends Migration
             'name' => 'Nadith Manawadu',
             'email' => 'nadith_manawadu@yahoo.com',
             'address' => 'AIT Institute, Kumarakanda, Dodanduwa',
-            'age' => 35,
+            'dob' => DateTime::createFromFormat('Y/m/d', '1990/06/05'),
             'gender' => 'Male',
             'phone_number' => '0770683621',
         ]);

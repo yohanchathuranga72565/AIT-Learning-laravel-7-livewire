@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Parent_ extends Model
 {
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'age', 'phone_number' ,'occupation' , 'gender'
+        'name', 'email', 'password', 'address', 'dob', 'phone_number' ,'occupation' , 'gender'
     ];
 
     public function user()

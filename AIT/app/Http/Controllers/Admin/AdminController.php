@@ -80,7 +80,7 @@ class AdminController extends Controller
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'age'  => ['required', 'max:70' , 'numeric'],
+            'dob'  => ['required','date'],
             'gender' => ['required'],
             'address'  => ['required', 'string', 'max:255'],
             'pno'  => ['required'],
@@ -98,7 +98,7 @@ class AdminController extends Controller
             'name' => $data['name'], 
             'address' => $data['address'], 
             'phone_number' => $data['pno'],
-            'age' => $data['age'],  
+            'dob' => $data['dob'],  
         ]);
 
         // $id->update(

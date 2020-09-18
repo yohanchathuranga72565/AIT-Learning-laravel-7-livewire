@@ -21,7 +21,7 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->string('address');
             $table->string('gender');
-            $table->integer('age');
+            $table->date('dob');
             $table->string('phone_number');
             $table->string('profile_image')->nullable();
             $table->timestamps();

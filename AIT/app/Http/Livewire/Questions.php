@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Rules\ImageValidationWithNull;
 use Illuminate\Support\Facades\Storage;
 
 class Questions extends Component
@@ -38,7 +39,12 @@ class Questions extends Component
 
     public function updatedImage()
     {
-        $this->validate(['image' => 'max:10240']);
+        $filename = null;
+        if($this->image){
+            $filename = $this->image->getClientOriginalname();
+        }
+        
+        $this->validate(['image' => ['max:10240',new ImageValidationWithNull($filename)]]);
     }
 
     public function remove($questionId){
@@ -61,8 +67,12 @@ class Questions extends Component
     }
 
     public function addQuestion(){
-        $this->validate(['newQuestion'=> 'required',
-                         'image' => 'max:10240']);
+        $filename = null;
+        if($this->image){
+            $filename = $this->image->getClientOriginalname();
+        }
+        $this->validate(['newQuestion'=> ['required'],
+                         'image' => ['max:10240',new ImageValidationWithNull($filename)]]);
 
         $image = $this->storeImage();
         $createdQuestion = auth()->user()->question()->create(['question'=>$this->newQuestion, 'image'=> $image]);

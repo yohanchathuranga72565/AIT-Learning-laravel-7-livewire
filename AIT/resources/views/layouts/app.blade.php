@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AIT Institute | Dashboard</title>
+  {{-- jquery --}}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -368,6 +370,48 @@
 <script src="{{asset('adminPanel/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminPanel/dist/js/adminlte.js')}}"></script>
+{{-- jquery ui --}}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#dob" ).datepicker({
+      maxDate:new Date(),
+      showAnim:'drop',
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1970:2030",
+    });
+
+    $( "#dobParent" ).datepicker({
+      maxDate:new Date(),
+      showAnim:'drop',
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1970:2030",
+    });
+
+    $( "#dobStudent" ).datepicker({
+      maxDate:new Date(),
+      showAnim:'drop',
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1970:2030",
+    });
+
+    $( "#dobTeacher" ).datepicker({
+      maxDate:new Date(),
+      showAnim:'drop',
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1970:2030",
+    });
+  } );
+</script>
 @livewireScripts
 
 

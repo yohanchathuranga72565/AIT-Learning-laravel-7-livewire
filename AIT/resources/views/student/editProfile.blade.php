@@ -78,12 +78,12 @@
                     </div> 
 
                     <div class="form-group row">
-                        <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
+                        <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
 
                         <div class="col-md-6">
-                            <input id="age" type="text" class="form-control @error('age') is-invalid @enderror" name="age" value="{{Auth::user()->student->age}}" required autocomplete="age">
+                            <input id="dob" type="text" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{Auth::user()->student->dob}}" required autocomplete="dob">
 
-                            @error('age')
+                            @error('dob')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

@@ -59,7 +59,7 @@
                                                 <h5 class="card-title my-2">Address</h5>
                                                 <p class="card-text"><input type="text" class="form-control" value="{{ $parent->address }}" readonly></p>
                                                 <h5 class="card-title my-2">Birth date</h5>
-                                                <p class="card-text"><input type="text" class="form-control" value="{{ $parent->age }}" readonly></p>
+                                                <p class="card-text"><input type="text" class="form-control" value="{{ $parent->dob }}" readonly></p>
                                                 <h5 class="card-title my-2">Gender</h5>
                                                 <p class="card-text"><input type="text" class="form-control" value="{{ $parent->gender }}" readonly></p>
                                                 <h5 class="card-title my-2">Mobile Number</h5>
