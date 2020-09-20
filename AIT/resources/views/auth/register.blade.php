@@ -104,33 +104,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="grade" class="col-md-4 col-form-label text-md-right">{{ __('Grade') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="grade" type="text" class="form-control @error('grade') is-invalid @enderror" name="grade" value="{{ old('grade') }}" required autocomplete="grade">
-                                    <option selected>Choose...</option>
-                                    <option>Grade 1</option>
-                                    <option>Grade 2</option>
-                                    <option>Grade 3</option>
-                                    <option>Grade 4</option>
-                                    <option>Grade 5</option>
-                                    <option>Grade 6</option>
-                                    <option>Grade 7</option>
-                                    <option>Grade 8</option>
-                                    <option>Grade 9</option>
-                                    <option>Grade 10</option>
-                                    <option>Grade 11(O/L)</option>
-                                    <option>Grade 12(A/L)</option>
-                                    <option>Grade 13(A/L)</option>
-                                </select>
-                                @error('grade')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        @livewire('student.student-register-grade')
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

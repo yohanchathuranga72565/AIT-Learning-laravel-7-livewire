@@ -107,19 +107,9 @@
                             <div class="col-md-6">
                                 <select id="grade" type="text" class="form-control @error('grade') is-invalid @enderror" name="grade" value="{{ old('grade') }}" required autocomplete="grade">
                                     <option selected>Choose...</option>
-                                    <option>Grade 1</option>
-                                    <option>Grade 2</option>
-                                    <option>Grade 3</option>
-                                    <option>Grade 4</option>
-                                    <option>Grade 5</option>
-                                    <option>Grade 6</option>
-                                    <option>Grade 7</option>
-                                    <option>Grade 8</option>
-                                    <option>Grade 9</option>
-                                    <option>Grade 10</option>
-                                    <option>Grade 11(O/L)</option>
-                                    <option>Grade 12(A/L)</option>
-                                    <option>Grade 13(A/L)</option>
+                                    @foreach ($grades as $grade)
+                                        <option value="{{ $grade->id }}">{{ $grade->grade }}</option>
+                                    @endforeach
                                 </select>
                                 @error('grade')
                                     <span class="invalid-feedback" role="alert">

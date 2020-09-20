@@ -122,17 +122,4 @@ class AdminController extends Controller
     {
         //
     }
-
-    public function profileUpload(Request $request){
-        if($request->hasFile('image')){
-            if(auth()->user()->admin->profile_image){
-                Storage::delete('/public/profileImages/'.auth()->user()->admin->profile_image);
-            }
-
-            $filename = $request->image->getClientOriginalname();
-            $request->image->storeAs('profileImages',$filename,'public');
-            auth()->user()->admin()->update(['profile_image'=> $filename]);
-            return redirect()->back();
-        }
-    }
 }

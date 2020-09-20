@@ -1,20 +1,16 @@
 <?php
 
 use App\User;
-// use Carbon\Traits\Date;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Seeder;
 
-class AddAdmin extends Migration
+class AddSuperAdmin extends Seeder
 {
     /**
-     * Run the migrations.
+     * Run the database seeds.
      *
      * @return void
      */
-    public function up()
+    public function run()
     {
         $add = User::create([
             'name' => 'Nadith Manawadu',
@@ -31,17 +27,5 @@ class AddAdmin extends Migration
             'gender' => 'Male',
             'phone_number' => '0770683621',
         ]);
-
-        return $add;
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        DB::table('users')->where('name','Nadith Manawadu')->delete();
     }
 }

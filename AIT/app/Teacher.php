@@ -7,12 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'dob', 'phone_number' ,'grade' , 'gender'
+        'name', 'email', 'password', 'address', 'dob', 'phone_number' ,'subject_id' , 'gender'
     ];
     
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function grade()
+    {
+        return $this->belongsToMany('App\Grade','teacher_grade'); 
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo('App\Subject');
     }
 
     

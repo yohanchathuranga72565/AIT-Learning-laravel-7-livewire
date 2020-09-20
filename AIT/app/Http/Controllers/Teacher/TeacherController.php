@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Teacher;
 use App\User;
+use App\Grade;
+use App\Subject;
 use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +24,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->isA('student')){
+        if(Auth::user()->isA('teacher')){
             return view('teacher.index');
         }
         else{
@@ -37,8 +39,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
+        $subject = Subject::all();
 
-        return view('teacher.teacherRegister');
+        return view('teacher.teacherRegister')->with(['subjects'=> $subject]);
     }
 
     /**
@@ -56,6 +59,7 @@ class TeacherController extends Controller
             'gender' => ['required'],
             'address'  => ['required', 'string', 'max:255'],
             'pno'  => ['required'],
+            'subject'  => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $user = User::create([
@@ -67,6 +71,7 @@ class TeacherController extends Controller
         $user->attachRole('teacher');
 
         $user->teacher()->create([
+            'subject_id' => $data['subject'],
             'name' => $data['name'],
             'email' => $data['email'],
             'address' => $data['address'],
@@ -171,5 +176,22 @@ class TeacherController extends Controller
     public function getAllDetails(){
         $teachers = Teacher::all();
         return view('teacher.allTeacherDetails')->with(['teachers'=>$teachers]);
+    }
+
+    public function showClasses(){
+        $teacher = Teacher::find(auth()->user()->teacher->id);
+        $teacher_grades = $teacher->grade;
+        $grades = Grade::all();
+        // return $grades;
+        return view('teacher.classes')->with(['grades'=> [$teacher_grades,$grades]]);
+    }
+
+    public function addClasses(Request $request){
+        $grade = $request->grade;
+        // $gradeid = Grade::where('grade',$grade)->get('id');
+        $gradeid = $request->selected;
+        $user = Teacher::find(auth()->user()->teacher->id);
+        $user->grade()->attach($gradeid);
+        return redirect(route('showClasses'));
     }
 }

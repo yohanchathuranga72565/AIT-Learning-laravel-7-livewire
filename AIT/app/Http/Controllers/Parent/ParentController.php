@@ -13,7 +13,7 @@ class ParentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:parent|administrator');
+        $this->middleware('role:parent|administrator|teacher');
     }
 
     /**

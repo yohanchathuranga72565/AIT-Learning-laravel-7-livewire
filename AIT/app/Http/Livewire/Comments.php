@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Comment;
 
 use Carbon\Carbon;
-use Livewire\Component;
+use Livewire\Component; 
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Rules\ImageValidationWithNull;

@@ -21,7 +21,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            @endif
+            @endif 
         </div>
         @if ($imagec)
             <img src="{{ $imagec->temporaryUrl() }}" class="mb-1" width="200">

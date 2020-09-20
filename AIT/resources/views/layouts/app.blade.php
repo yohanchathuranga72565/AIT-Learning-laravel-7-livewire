@@ -232,65 +232,41 @@
                 @endif
                 
 
-              @if (Auth::user()->isAn('administrator'))
-                {{-- profile creation menu --}}
-                {{-- <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                      <i class="fa fa-user-plus" aria-hidden="true"></i>
-                      <p class="pl-1">
-                          Profile Creation
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{route('teacher.create')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Create Teacher Account</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="{{route('student.create')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Create Student Account</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="{{route('parent.create')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Create Parent Account</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li> --}}
+                
                 {{-- account managment menu --}}
+                @if (Auth::user()->isAn('administrator|teacher'))
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
-                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <i class="fa fa-user p-1" aria-hidden="true"></i>
                       <p class="pl-1">
                           Account managment
                           <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>
+                  
                   <ul class="nav nav-treeview">
+                    @if (Auth::user()->isAn('administrator|teacher'))
                     <li class="nav-item">
                       <a href="{{ route('parentGetAllDetails') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon pl-2"></i>
                         <p>Parent</p>
                       </a>
                     </li>
                     <li class="nav-item">
                     <a href="{{ route('studentGetAllDetails') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon pl-2"></i>
                         <p>Student</p>
                       </a>
                     </li>
+                    @endif
+                    @if (Auth::user()->isAn('administrator'))
                     <li class="nav-item">
                       <a href="{{ route('teacherGetAllDetails') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon pl-2"></i>
                         <p>Teacher</p>
                       </a>
                     </li>
+                    @endif
                   </ul>
                 </li>
                 @endif
@@ -299,6 +275,14 @@
                     <a href="{{ route('comments') }}" class="nav-link">
                       <i class="nav-icon fa fa-comment" aria-hidden="true"></i>
                       <p>Comment Section</p>
+                    </a>
+                  </li>
+                @endif
+                @if (Auth::user()->isA('teacher'))
+                  <li class='nav-item'>
+                    <a href="{{ route('showClasses') }}" class="nav-link">
+                      <i class="nav-icon fa fa-users" aria-hidden="true"></i>
+                      <p>Classes</p>
                     </a>
                   </li>
                 @endif

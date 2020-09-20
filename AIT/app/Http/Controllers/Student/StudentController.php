@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Student;
+
+use App\Grade;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +14,7 @@ class StudentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:student|administrator');
+        $this->middleware('role:student|administrator|teacher');
         // $this->middleware('role:student|adminisitrator'); different role access
     }
     /**
@@ -38,7 +40,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.studentRegister');
+        $grades = Grade::all();
+        return view('student.studentRegister')->with(['grades'=> $grades]);
     }
 
 
@@ -75,7 +78,7 @@ class StudentController extends Controller
             'dob' => $data['dob'],
             'gender' => $data['gender'],
             'phone_number' => $data['pno'],
-            'grade' => $data['grade'],
+            'grade_id' => $data['grade'],
         ]);
 
         return view('admin.index');

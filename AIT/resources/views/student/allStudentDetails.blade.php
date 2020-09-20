@@ -31,7 +31,7 @@
                             <th scope="row">{{ $student->id }}</th>
                             <td>{{ $student->name }}</td>
                             <td>{{ $student->email }}</td>
-                            <td>{{ $student->grade }}</td>
+                            <td>{{ $student->grade->grade }}</td>
                             <td><a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$student->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a></td>
                             <td><a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td>
                         </tr>
@@ -72,7 +72,7 @@
                                                   <h5 class="card-title my-2">Mobile Number</h5>
                                                   <p class="card-text"><input type="text" class="form-control" value="{{ $student->phone_number }}" readonly></p>
                                                   <h5 class="card-title my-2">Grade</h5>
-                                                  <p class="card-text"><input type="text" class="form-control" value="{{ $student->grade }}" readonly></p>
+                                                  <p class="card-text"><input type="text" class="form-control" value="{{ $student->grade->grade }}" readonly></p>
                                                 </div>
                                               </div>
                                         </div>

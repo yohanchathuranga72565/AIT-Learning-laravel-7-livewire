@@ -102,6 +102,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="subject" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{ old('subject') }}" required autocomplete="subject">
+                                    <option selected>Choose...</option>
+                                    @foreach ($subjects as $subject)
+                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('subject')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

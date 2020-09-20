@@ -78,12 +78,13 @@ class RegisterController extends Controller
         $user->attachRole('student');
 
         $user->student()->create([
+            'grade_id'=> $data['grade'],
             'name' => $data['name'],
             'email' => $data['email'],
             'address' => $data['address'],
             'dob' => $data['dob'],
             'gender' => $data['gender'],
-            'grade' => $data['grade'],
+            // 'grade' => $data['grade'],
             'phone_number' => $data['pno'],
         ]);
 

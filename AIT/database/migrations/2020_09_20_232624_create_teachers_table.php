@@ -17,6 +17,8 @@ class CreateTeachersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('subject_id');
+            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('address');
