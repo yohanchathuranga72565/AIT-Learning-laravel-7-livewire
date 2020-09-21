@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Grade;
 use App\User;
+use App\Grade;
+use App\Student;
+use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Student;
+use App\Mail\GetSubjectPermission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -177,5 +179,41 @@ class StudentController extends Controller
     public function getAllDetails(){
         $students = Student::all();
         return view('student.allStudentDetails')->with(['students'=>$students]);
+    }
+
+    public function showSubjects(){
+        // $teacher = Teacher::find(auth()->user()->teacher->id);
+        // $teacher_grades = $teacher->grade;
+        // $grades = Grade::all();
+        // return $grades;
+        $grade = Grade::find(auth()->user()->student->grade->id);
+        $teacher = $grade->teacher;
+        $student = Student::find(auth()->user()->student->id);
+        $subject = $student->subject;
+        return view('student.subject')->with(['teachers'=>[$teacher,$subject]]);
+    }
+
+    public function getPermisionSubject(Request $request){
+        $request->validate(['selected' => 'required']);
+        $teacherid = $request->selected;
+        $teachers = Teacher::whereIn('id',$teacherid)->get();
+        
+        foreach($teachers as $teacher){ 
+            $details = [
+                'subject'=> "You have new student request",
+                'student_name'=> auth()->user()->name,
+                'student_email'=> auth()->user()->email,
+                'student_id'=> auth()->user()->student->id,
+                'teacher_id'=> $teacher->id,
+            ];
+            \Mail::to($teacher->email)->send(new \App\Mail\GetSubjectPermission($details));
+        }
+
+        return redirect()->back();
+
+        // return new GetSubjectPermission();
+        
+    
+        // return redirect()->back()->with('sentmail', 'Email has sent successfully');
     }
 }

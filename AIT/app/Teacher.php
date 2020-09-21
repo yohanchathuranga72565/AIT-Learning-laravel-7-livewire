@@ -25,5 +25,10 @@ class Teacher extends Model
         return $this->belongsTo('App\Subject');
     }
 
+    public function student()
+    {
+        return $this->belongsToMany('App\Student','student_teachers');
+    }
+
     
 }

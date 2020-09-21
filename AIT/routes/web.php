@@ -32,10 +32,15 @@ Route::resource('teacher', 'Teacher\TeacherController');
 Route::get('/allTeacherDetails','Teacher\TeacherController@getAllDetails')->name('teacherGetAllDetails');
 Route::get('/classes','Teacher\TeacherController@showClasses')->name('showClasses');
 Route::post('/addClass','Teacher\TeacherController@addClasses')->name('addClasses');
+Route::get('/allowPermisionSubject/{sid}/{tid}','Teacher\TeacherController@allowPermisionSubject');
 
 Route::resource('student', 'Student\StudentController');
 // Route::post('/studentProfileUpload','Student\StudentController@profileUpload')->name('studentProfileUpload');
 Route::get('/allStudentDetails','Student\StudentController@getAllDetails')->name('studentGetAllDetails');
+Route::get('/subjects','Student\StudentController@showSubjects')->name('showSubjects');
+Route::post('/getPermisionSubject','Student\StudentController@getPermisionSubject')->name('getPermisionSubject');
+
+
 
 Route::resource('parent', 'Parent\ParentController');
 // Route::post('/parentProfileUpload','Parent\ParentController@profileUpload')->name('parentProfileUpload');

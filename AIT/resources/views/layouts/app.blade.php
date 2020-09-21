@@ -286,6 +286,14 @@
                     </a>
                   </li>
                 @endif
+                @if (Auth::user()->isA('student'))
+                  <li class='nav-item'>
+                    <a href="{{ route('showSubjects') }}" class="nav-link">
+                      <i class="nav-icon fa fa-book" aria-hidden="true"></i>
+                      <p>Subjects</p>
+                    </a>
+                  </li>
+                @endif
           </ul> 
         </nav>
         <!-- /.sidebar-menu -->

@@ -187,11 +187,24 @@ class TeacherController extends Controller
     }
 
     public function addClasses(Request $request){
+        $request->validate(['grade'=> 'required']);
+
         $grade = $request->grade;
         // $gradeid = Grade::where('grade',$grade)->get('id');
         $gradeid = $request->selected;
         $user = Teacher::find(auth()->user()->teacher->id);
         $user->grade()->attach($gradeid);
         return redirect(route('showClasses'));
+    }
+
+    public function allowPermisionSubject($sid,$tid){
+        
+        $teacher = Teacher::find($tid);
+        $teacher->student()->attach($sid);
+
+        $subject = Subject::find($teacher->subject->id);
+        $subject->student()->attach($sid);
+        // return redirect(route('showClasses'));
+        return $sid;
     }
 }

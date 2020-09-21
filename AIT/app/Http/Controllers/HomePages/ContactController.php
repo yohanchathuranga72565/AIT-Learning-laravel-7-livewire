@@ -21,7 +21,7 @@ class ContactController extends Controller
             'subject' => 'required|max:50',
             'message' => 'required|max:500',
         ]);
-
+ 
         $details = [
             'subject'=> $request->subject,
             'name'=> $request->name,
