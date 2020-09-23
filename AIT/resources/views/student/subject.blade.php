@@ -73,15 +73,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                    
                     @foreach ($teachers[0] as $teacher)
+                        @foreach($teachers[1] as $subjects)
+                        @if ($subjects->name == $teacher->subject->name )
                         <tr>
-                            <td scope="row">{{ $teacher->subject->name }}</td>
+                            <td scope="row">{{ $subjects->name }}</td>
                             <td scope="row">{{ $teacher->name }}</td>
 
                             <td><a class="btn btn-sm btn-primary" href="#" ><i class="fa fa-sm fa-book" aria-hidden="true"></i> Get Resources</a></td>
                             {{-- <td><a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td> --}}
                         </tr>
+                        @endif
+                        @endforeach
                     @endforeach
+                
                 </tbody>
               </table>
         </div>

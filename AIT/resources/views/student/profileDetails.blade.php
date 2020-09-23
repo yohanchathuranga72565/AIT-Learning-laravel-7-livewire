@@ -34,7 +34,7 @@
                       <h5 class="card-title my-2">Mobile Number</h5>
                       <p class="card-text"><input type="text" class="form-control" value="{{ $student->phone_number }}" readonly></p>
                       <h5 class="card-title my-2">Grade</h5>
-                      <p class="card-text"><input type="text" class="form-control" value="{{ $student->grade }}" readonly></p>
+                      <p class="card-text"><input type="text" class="form-control" value="{{ $student->grade->grade }}" readonly></p>
                     </div>
                   </div>
             </div>

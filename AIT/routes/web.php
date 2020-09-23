@@ -18,6 +18,7 @@ Route::get('/about','HomePages\AboutController@index')->name('home.about');
 Route::get('/contact','HomePages\ContactController@index')->name('home.contact');
 Route::get('/', 'HomePages\HomeController@index')->name('home.home');
 Route::post('/send-email','HomePages\ContactController@sendEmail' )->name('contact-mail');
+Route::get('/allowPermisionSubject/{sid}/{tid}','HomePages\HomeController@allowPermisionSubject');
 
 Auth::routes();
 
@@ -32,7 +33,7 @@ Route::resource('teacher', 'Teacher\TeacherController');
 Route::get('/allTeacherDetails','Teacher\TeacherController@getAllDetails')->name('teacherGetAllDetails');
 Route::get('/classes','Teacher\TeacherController@showClasses')->name('showClasses');
 Route::post('/addClass','Teacher\TeacherController@addClasses')->name('addClasses');
-Route::get('/allowPermisionSubject/{sid}/{tid}','Teacher\TeacherController@allowPermisionSubject');
+
 
 Route::resource('student', 'Student\StudentController');
 // Route::post('/studentProfileUpload','Student\StudentController@profileUpload')->name('studentProfileUpload');
