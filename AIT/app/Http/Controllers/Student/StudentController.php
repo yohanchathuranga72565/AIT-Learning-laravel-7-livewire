@@ -177,7 +177,13 @@ class StudentController extends Controller
     }
 
     public function getAllDetails(){
-        $students = Student::all();
+        if(auth()->user()->isA('administrator')){
+            $students = Student::all();
+        }
+        else if(auth()->user()->isA('teacher')){
+            $teacher = Teacher::find(auth()->user()->teacher->id);
+            $students = $teacher->student;
+        } 
         return view('student.allStudentDetails')->with(['students'=>$students]);
     }
 

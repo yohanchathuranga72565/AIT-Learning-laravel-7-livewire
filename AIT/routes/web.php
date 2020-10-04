@@ -32,7 +32,12 @@ Route::resource('teacher', 'Teacher\TeacherController');
 // Route::post('/teacherProfileUpload','Teacher\TeacherController@profileUpload')->name('teacherProfileUpload');
 Route::get('/allTeacherDetails','Teacher\TeacherController@getAllDetails')->name('teacherGetAllDetails');
 Route::get('/classes','Teacher\TeacherController@showClasses')->name('showClasses');
+Route::get('/attendance','Teacher\TeacherController@attendanceShowClasses')->name('attendanceShowClasses');
+Route::get('/resources','Teacher\TeacherController@resourcesShowClasses')->name('resourcesShowClasses');
+Route::get('/resourcesUploadForm/{grade}','Teacher\TeacherController@resourcesUploadForm')->name('resourcesUploadForm');
+Route::post('/resourcesUpload/{grade}','Teacher\TeacherController@resourcesUpload')->name('resourcesUpload');
 Route::post('/addClass','Teacher\TeacherController@addClasses')->name('addClasses');
+Route::get('/viewResources/{grade}/{teacher}','Teacher\TeacherController@viewResources')->name('viewResources');
 
 
 Route::resource('student', 'Student\StudentController');

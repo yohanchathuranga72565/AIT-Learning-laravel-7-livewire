@@ -30,5 +30,10 @@ class Teacher extends Model
         return $this->belongsToMany('App\Student','student_teachers');
     }
 
+    public function resource()
+    {
+        return $this->hasMany('App\Resource');
+    }
+
     
 }

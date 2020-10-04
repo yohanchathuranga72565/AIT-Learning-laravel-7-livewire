@@ -1,21 +1,22 @@
+
 @extends('layouts.app')
 
 @section('content')
 
     <div class="container my-2">
         <div class="row justify-content-center my-2">
-          <h2>Classes</h2>
+          <h2>Attendance</h2>
         </div>
-        <div class="row justify-content-center my-2">
+        {{-- <div class="row justify-content-center my-2">
           <div class="col-6">
-            <a href="#" data-toggle="modal" data-target="#addClass" class="btn btn-sm btn-primary"><i class="fa fa-sm fa-users" aria-hidden="true"></i> Add Class</a>
+            <a href="#" data-toggle="modal" data-target="#addClass" class="btn btn-sm btn-primary"><i class="fa fa-sm fa-users" aria-hidden="true"></i> Attendance</a>
           </div>
-          <div class="col-6">
+          <div class="col-6"> --}}
               {{-- can write something --}}
-          </div>
-        </div>
+          {{-- </div>
+        </div> --}}
         {{-- student modal relate to the row --}}
-        <div class="modal fade" id="addClass" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
+        {{-- <div class="modal fade" id="addClass" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <form action="{{ route('addClasses') }}" method="post">
                     @csrf
@@ -28,7 +29,7 @@
                         </div>
                         <div class="modal-body">
                         <div class="row justify-content-center">
-                            {{-- <input type="text" name ='grade'> --}}
+                            
                             @foreach ($grades[1] as $grade)
                                 <div class="col-4">
                                     <div class="form-check form-check-inline">
@@ -53,7 +54,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> --}}
         <div class="row justify-content-center">
             <table class="table table-hover table-sm table-responsive-sm">
                 <thead class="thead-dark">
@@ -65,11 +66,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($grades[0] as $grade)
+                    @foreach ($grades as $grade)
                         <tr>
                             <td scope="row">{{ $grade->grade }}</td>
 
-                            <td><a class="btn btn-sm btn-primary" href="#" ><i class="fa fa-sm fa-user" aria-hidden="true"></i> Student</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="#" ><i class="fa fa-sm fa-user" aria-hidden="true"></i> Mark attendance</a></td>
                             {{-- <td>
                               <a class="btn btn-sm btn-info" href="{{ route('getLinkedStudent',$parent->id) }}"><i class="fa fa-user" aria-hidden="true"></i> Student</a>
                             </td> --}}

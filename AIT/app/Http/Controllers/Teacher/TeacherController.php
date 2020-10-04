@@ -5,6 +5,7 @@ use App\User;
 use App\Grade;
 use App\Subject;
 use App\Teacher;
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -185,6 +186,60 @@ class TeacherController extends Controller
         // return $grades;
         return view('teacher.classes')->with(['grades'=> [$teacher_grades,$grades]]);
     }
+
+    public function attendanceShowClasses(){
+        $teacher = Teacher::find(auth()->user()->teacher->id);
+        $teacher_grades = $teacher->grade;
+        // $grades = Grade::all();
+        // return $grades;
+        return view('teacher.attendance')->with(['grades'=> $teacher_grades]);
+    }
+
+    public function resourcesShowClasses(){
+        $teacher = Teacher::find(auth()->user()->teacher->id);
+        $teacher_grades = $teacher->grade;
+        // $grades = Grade::all();
+        // return $grades;
+        return view('teacher.resources')->with(['grades'=> $teacher_grades]);
+    }
+
+    public function resourcesUploadForm($grade){
+        return view('teacher.upload-resources')->with(['grade_id'=> $grade]);
+    }
+
+    public function resourcesUpload(Request $request,$grade_id){
+        $filename='';
+        // $file_extension='';
+
+        $request->validate([
+            'capter' => ['required','max:255'],
+            'title'  => ['required','max:255'],
+            'file' => ['required']
+        ]);
+
+
+
+        if($request->file){
+            $filename = $request->file->getClientOriginalname();
+            $request->file->storeAs('public/resources',$filename);
+        }
+
+        $newResource = Resource::create(['grade_id'=>$grade_id,'teacher_id'=>auth()->user()->teacher->id,'capter'=>$request->capter, 'title'=> $request->title, 'file'=> $filename]);
+        $filename='';
+        return redirect()->back()->with('success','New Resources Uploaded.');
+    }
+
+    public function viewResources($grade_id,$teacher_id){
+
+        // $teacher = Teacher::find($teacher_id)
+        $resources = Resource::where([
+            ['grade_id', '=',$grade_id],
+            ['teacher_id', '=',$teacher_id]
+        ])->get();
+        // return $resources;
+        return view('teacher.view-resources')->with(['resources'=>$resources]);
+    }
+
 
     public function addClasses(Request $request){
         $request->validate(['selected'=> 'required']);

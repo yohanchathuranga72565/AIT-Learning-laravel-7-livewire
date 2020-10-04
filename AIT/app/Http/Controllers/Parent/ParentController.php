@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Parent;
 use App\User;
 use App\Parent_;
 use App\Student;
+use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -174,6 +175,15 @@ class ParentController extends Controller
     
     public function getAllDetails(){
         $parents = Parent_::all();
+        // if(auth()->user()->isA('administrator')){
+        //     $parents = Parent::all();
+        // }
+        // else if(auth()->user()->isA('teacher')){
+        //     $teacher = Teacher::find(auth()->user()->teacher->id);
+        //     $parents = $teacher->student;
+        //     $parents = $students->parent;
+        // } 
+        // return $students;
         return view('parent.allParentDetails')->with(['parents'=>$parents]);
     }
 
