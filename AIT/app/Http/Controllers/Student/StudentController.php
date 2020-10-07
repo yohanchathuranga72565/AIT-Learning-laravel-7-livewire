@@ -6,9 +6,10 @@ use App\User;
 use App\Grade;
 use App\Student;
 use App\Teacher;
+use App\Resource;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Mail\GetSubjectPermission;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -198,6 +199,18 @@ class StudentController extends Controller
         $subject = $student->subject;
         return view('student.subject')->with(['teachers'=>[$teacher,$subject]]);
     }
+
+    // public function studentViewResources($grade_id,$teacher_id){
+
+    //     // $teacher = Teacher::find($teacher_id)
+    //     $resources = Resource::where([
+    //         ['grade_id', '=',$grade_id],
+    //         ['teacher_id', '=',$teacher_id]
+    //     ])->get();
+    //     // return $resources;
+    //     return view('teacher.view-resources')->with(['resources'=>$resources]);
+    // }
+
 
     public function getPermisionSubject(Request $request){
         $request->validate(['selected' => 'required']);

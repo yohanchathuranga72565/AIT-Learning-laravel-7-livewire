@@ -38,6 +38,11 @@ Route::get('/resourcesUploadForm/{grade}','Teacher\TeacherController@resourcesUp
 Route::post('/resourcesUpload/{grade}','Teacher\TeacherController@resourcesUpload')->name('resourcesUpload');
 Route::post('/addClass','Teacher\TeacherController@addClasses')->name('addClasses');
 Route::get('/viewResources/{grade}/{teacher}','Teacher\TeacherController@viewResources')->name('viewResources');
+Route::get('/showResources/{id}','Teacher\TeacherController@showResources')->name('showResources');
+Route::get('/editResourcesForm/{id}','Teacher\TeacherController@editResourcesForm')->name('editResourcesForm');
+Route::post('/editResources/{id}','Teacher\TeacherController@editResources')->name('editResources');
+Route::get('/editResourcesFile/{id}','Teacher\TeacherController@editResourcesFileForm')->name('editResourcesFileForm');
+Route::post('/editResourcesFile/{id}','Teacher\TeacherController@editResourcesFile')->name('editResourcesFile');
 
 
 Route::resource('student', 'Student\StudentController');
@@ -45,6 +50,7 @@ Route::resource('student', 'Student\StudentController');
 Route::get('/allStudentDetails','Student\StudentController@getAllDetails')->name('studentGetAllDetails');
 Route::get('/subjects','Student\StudentController@showSubjects')->name('showSubjects');
 Route::post('/getPermisionSubject','Student\StudentController@getPermisionSubject')->name('getPermisionSubject');
+
 
 
 

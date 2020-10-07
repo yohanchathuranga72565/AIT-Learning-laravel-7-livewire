@@ -25,9 +25,9 @@
                             <td scope="row">{{ $resource->file }}</td>
                             <td>
                                 <div >
-                                    <a class="btn btn-sm btn-primary mt-1" href="#" > Edit</a>
-                                    <a class="btn btn-sm btn-primary mt-1" href="#" > Change File</a>
-                                    <a class="btn btn-sm btn-info mt-1" href="#" > View</a>
+                                    <a class="btn btn-sm btn-primary mt-1" href="{{ route('editResourcesForm',$resource->id) }}" > Edit</a>
+                                    <a class="btn btn-sm btn-primary mt-1" href="{{ route('editResourcesFileForm',$resource->id) }}" > Change File</a>
+                                    <a class="btn btn-sm btn-info mt-1" href="{{ route('showResources',$resource->id) }}" > View</a>
                                     <a class="btn btn-sm btn-danger mt-1" href="#" > Delete</a>
                                 </div>
                             </td>

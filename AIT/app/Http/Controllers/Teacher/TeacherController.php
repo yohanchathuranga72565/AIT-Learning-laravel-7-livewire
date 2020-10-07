@@ -15,7 +15,9 @@ class TeacherController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:teacher|administrator');
+        $this->middleware('role:teacher|administrator',['except' => [
+            'showResources','viewResources'
+        ]]);
     }
 
     /**
@@ -229,6 +231,20 @@ class TeacherController extends Controller
         return redirect()->back()->with('success','New Resources Uploaded.');
     }
 
+    public function editResourcesForm($id){
+        $resources = Resource::find($id);
+        return view('teacher.edit-resources')->with(['resources'=>$resources]);
+    }
+
+    public function editResources(Request $data,$id){
+        $data->validate([
+            'capter' => ['required','max:255'],
+            'title'  => ['required','max:255']
+        ]);
+        Resource::where('id',$id)->update(['capter'=>$data->capter,'title'=>$data->title]);
+        return redirect()->back()->with('success','Resources Updated.');
+    }
+
     public function viewResources($grade_id,$teacher_id){
 
         // $teacher = Teacher::find($teacher_id)
@@ -238,6 +254,39 @@ class TeacherController extends Controller
         ])->get();
         // return $resources;
         return view('teacher.view-resources')->with(['resources'=>$resources]);
+    }
+
+    public function showResources($id){
+        $file = Resource::find($id);
+        return view('teacher.show-resources')->with(['file'=>$file]);
+    }
+
+    public function editResourcesFileForm($id){
+        $resources = Resource::find($id);
+        return view('teacher.edit-resources-file')->with(['resources'=>$resources]);
+    }
+
+    public function editResourcesFile(Request $request,$id){
+        $filename='';
+        // $file_extension='';
+
+        $request->validate([
+            'file' => ['required']
+        ]);
+
+
+
+        if($request->file){
+            $oldfile = Resource::find($id);
+            $filename = $request->file->getClientOriginalname();
+            Storage::delete('/public/resources/'.$oldfile->file);
+
+            
+            $request->file->storeAs('public/resources',$filename);
+            Resource::where('id',$id)->update(['file'=>$filename]);
+        }
+        $filename='';
+        return redirect()->back()->with('success','Resources Updated.');
     }
 
 
