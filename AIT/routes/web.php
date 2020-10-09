@@ -32,7 +32,7 @@ Route::resource('teacher', 'Teacher\TeacherController');
 // Route::post('/teacherProfileUpload','Teacher\TeacherController@profileUpload')->name('teacherProfileUpload');
 Route::get('/allTeacherDetails','Teacher\TeacherController@getAllDetails')->name('teacherGetAllDetails');
 Route::get('/classes','Teacher\TeacherController@showClasses')->name('showClasses');
-Route::get('/attendance','Teacher\TeacherController@attendanceShowClasses')->name('attendanceShowClasses');
+// Route::get('/attendance','Teacher\TeacherController@attendanceShowClasses')->name('attendanceShowClasses');
 Route::get('/resources','Teacher\TeacherController@resourcesShowClasses')->name('resourcesShowClasses');
 Route::get('/resourcesUploadForm/{grade}','Teacher\TeacherController@resourcesUploadForm')->name('resourcesUploadForm');
 Route::post('/resourcesUpload/{grade}','Teacher\TeacherController@resourcesUpload')->name('resourcesUpload');
@@ -43,6 +43,8 @@ Route::get('/editResourcesForm/{id}','Teacher\TeacherController@editResourcesFor
 Route::post('/editResources/{id}','Teacher\TeacherController@editResources')->name('editResources');
 Route::get('/editResourcesFile/{id}','Teacher\TeacherController@editResourcesFileForm')->name('editResourcesFileForm');
 Route::post('/editResourcesFile/{id}','Teacher\TeacherController@editResourcesFile')->name('editResourcesFile');
+Route::get('/deleteResources/{id}','Teacher\TeacherController@deleteResources')->name('deleteResources');
+Route::get('/gradeStudent/{id}','Teacher\TeacherController@showGradeStudentList')->name('gradeStudent');
 
 
 Route::resource('student', 'Student\StudentController');

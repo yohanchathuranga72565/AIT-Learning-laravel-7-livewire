@@ -30,6 +30,8 @@
                       <p class="card-text"><input type="text" class="form-control" value="{{ $teacher->dob }}" readonly></p>
                       <h5 class="card-title my-2">Gender</h5>
                       <p class="card-text"><input type="text" class="form-control" value="{{ $teacher->gender }}" readonly></p>
+                      <h5 class="card-title my-2">Subject</h5>
+                      <p class="card-text"><input type="text" class="form-control" value="{{ $teacher->subject->name }}" readonly></p>
                       <h5 class="card-title my-2">Mobile Number</h5>
                       <p class="card-text"><input type="text" class="form-control" value="{{ $teacher->phone_number }}" readonly></p>
                     </div>

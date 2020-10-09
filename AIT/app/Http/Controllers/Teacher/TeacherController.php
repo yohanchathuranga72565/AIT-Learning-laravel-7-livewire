@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 use App\User;
 use App\Grade;
+use App\Student;
 use App\Subject;
 use App\Teacher;
 use App\Resource;
@@ -183,23 +184,23 @@ class TeacherController extends Controller
 
     public function showClasses(){
         $teacher = Teacher::find(auth()->user()->teacher->id);
-        $teacher_grades = $teacher->grade;
+        $teacher_grades = $teacher->grade()->paginate(10);
         $grades = Grade::all();
         // return $grades;
         return view('teacher.classes')->with(['grades'=> [$teacher_grades,$grades]]);
     }
 
-    public function attendanceShowClasses(){
-        $teacher = Teacher::find(auth()->user()->teacher->id);
-        $teacher_grades = $teacher->grade;
-        // $grades = Grade::all();
-        // return $grades;
-        return view('teacher.attendance')->with(['grades'=> $teacher_grades]);
-    }
+    // public function attendanceShowClasses(){
+    //     $teacher = Teacher::find(auth()->user()->teacher->id);
+    //     $teacher_grades = $teacher->grade;
+    //     // $grades = Grade::all();
+    //     // return $grades;
+    //     return view('teacher.attendance')->with(['grades'=> $teacher_grades]);
+    // }
 
     public function resourcesShowClasses(){
         $teacher = Teacher::find(auth()->user()->teacher->id);
-        $teacher_grades = $teacher->grade;
+        $teacher_grades = $teacher->grade()->paginate(10);
         // $grades = Grade::all();
         // return $grades;
         return view('teacher.resources')->with(['grades'=> $teacher_grades]);
@@ -222,7 +223,7 @@ class TeacherController extends Controller
 
 
         if($request->file){
-            $filename = $request->file->getClientOriginalname();
+            $filename = auth()->user()->teacher->id.$grade_id.'-'.$request->file->getClientOriginalname();
             $request->file->storeAs('public/resources',$filename);
         }
 
@@ -251,7 +252,7 @@ class TeacherController extends Controller
         $resources = Resource::where([
             ['grade_id', '=',$grade_id],
             ['teacher_id', '=',$teacher_id]
-        ])->get();
+        ])->paginate(10);
         // return $resources;
         return view('teacher.view-resources')->with(['resources'=>$resources]);
     }
@@ -278,7 +279,7 @@ class TeacherController extends Controller
 
         if($request->file){
             $oldfile = Resource::find($id);
-            $filename = $request->file->getClientOriginalname();
+            $filename = auth()->user()->teacher->id.$oldfile->grade_id.'-'.$request->file->getClientOriginalname();
             Storage::delete('/public/resources/'.$oldfile->file);
 
             
@@ -287,6 +288,14 @@ class TeacherController extends Controller
         }
         $filename='';
         return redirect()->back()->with('success','Resources Updated.');
+    }
+
+    public function deleteResources($id){
+        $resource = Resource::find($id);
+        Storage::delete('/public/resources/'.$resource->file);
+        Resource::where('id',$id)->delete();
+
+        return redirect()->back()->with('success','Resource deleted successfully.');
     }
 
 
@@ -299,6 +308,31 @@ class TeacherController extends Controller
         $user = Teacher::find(auth()->user()->teacher->id);
         $user->grade()->attach($gradeid);
         return redirect(route('showClasses'));
+    }
+
+    public function showGradeStudentList($grade_id){
+        $teacher = Teacher::find(auth()->user()->teacher->id);
+        $student_teachers = $teacher->student;
+        $student_id = [];
+        foreach($student_teachers as $student_teacher){
+            $student_id[] = $student_teacher->id;
+        }
+        
+        $students = Student::where('grade_id',$grade_id)->whereIn('id',$student_id)->paginate(10);
+        // return $student_grades;
+        // $student = array();
+        // foreach($student_teachers as $student_teacher){
+        //     foreach($student_grades as $student_grade){
+        //         if($student_teacher->id == $student_grade->id){
+        //             $student[]=$student_grade;
+        //             break;
+        //         }
+        //     }
+
+        // }
+        // $students = $student;
+
+        return view('teacher.teacher-student')->with(['students'=>$students]);
     }
 
 }

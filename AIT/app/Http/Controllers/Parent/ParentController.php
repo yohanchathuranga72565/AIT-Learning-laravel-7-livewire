@@ -174,16 +174,23 @@ class ParentController extends Controller
     }
     
     public function getAllDetails(){
-        $parents = Parent_::all();
-        // if(auth()->user()->isA('administrator')){
-        //     $parents = Parent::all();
-        // }
-        // else if(auth()->user()->isA('teacher')){
-        //     $teacher = Teacher::find(auth()->user()->teacher->id);
-        //     $parents = $teacher->student;
-        //     $parents = $students->parent;
-        // } 
-        // return $students;
+        // $parents = Parent_::all();
+        $parents = [];
+        if(auth()->user()->isA('administrator')){
+            $parents = Parent_::all();
+        }
+        else if(auth()->user()->isA('teacher')){
+            $teacher = Teacher::find(auth()->user()->teacher->id);
+            $students = $teacher->student;
+            // $parents = $students->parent;
+            $student_id = [];
+            $parent_id = [];
+            foreach($students as $student){
+                $student_id[] = $student->id;
+                $parent_id[] = $student->parent__id;
+            }
+            $parents = Parent_::whereIn('id',$parent_id)->paginate(10);
+        } 
         return view('parent.allParentDetails')->with(['parents'=>$parents]);
     }
 

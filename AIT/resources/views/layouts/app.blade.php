@@ -285,12 +285,12 @@
                       <p>Classes</p>
                     </a>
                   </li>
-                  <li class='nav-item'>
+                  {{-- <li class='nav-item'>
                     <a href="{{ route('attendanceShowClasses') }}" class="nav-link">
                       <i class="nav-icon fa fa-address-card" aria-hidden="true"></i>
                       <p>Attendance</p>
                     </a>
-                  </li>
+                  </li> --}}
                   <li class='nav-item'>
                     <a href="{{ route('resourcesShowClasses') }}" class="nav-link">
                       <i class="nav-icon fa fa-book" aria-hidden="true"></i>

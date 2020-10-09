@@ -15,14 +15,12 @@
         <div class="row justify-content-center">
             <table class="col-12 table table-hover table-sm table-responsive-lg">
                 <thead class="thead-dark">
-                  <tr>
+                  <tr class="text-center">
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">Action</th>
+                 
                   </tr>
                 </thead>
                 <tbody>
@@ -82,10 +80,12 @@
                             <th scope="row">{{ $student->id }}</th>
                             <td>{{ $student->name }}</td>
                             <td>{{ $student->email }}</td>
-                            <td><a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$student->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a></td>
-                            <td><a class="btn btn-sm btn-info" href="#" ><i class="fa fa-sm fa-book" aria-hidden="true"></i> Exam</a></td>
-                            <td><a class="btn btn-sm btn-info" href="#" ><i class="fa fa-sm fa-check" aria-hidden="true"></i> Attendance</a></td>
-                            <td><a class="btn btn-sm btn-warning" href="#" ><i class="fa fa-sm fa-credit-card" aria-hidden="true"></i> Class payment</a></td>
+                            <td class="text-right">
+                              <a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$student->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                              <a class="btn btn-sm btn-info" href="#" ><i class="fa fa-sm fa-book" aria-hidden="true"></i> Exam</a>
+                              <a class="btn btn-sm btn-info" href="#" ><i class="fa fa-sm fa-check" aria-hidden="true"></i> Attendance</a>
+                              <a class="btn btn-sm btn-warning" href="#" ><i class="fa fa-sm fa-credit-card" aria-hidden="true"></i> Class payment</a>
+                            </td>
                         </tr>
 
                         {{-- view modal relate to the row --}}

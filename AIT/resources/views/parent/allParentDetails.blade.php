@@ -17,14 +17,12 @@
         <div class="row justify-content-center">
             <table class="table table-hover table-sm table-responsive-lg">
                 <thead class="thead-dark">
-                  <tr>
+                  <tr class="text-center">
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     {{-- <th scope="col">SUbject</th> --}}
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -82,11 +80,12 @@
                             <td>{{ $parent->name }}</td>
                             <td>{{ $parent->email }}</td>
                             {{-- <td>{{ $student->subject }}</td> --}}
-                            <td><a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$parent->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a></td>
-                            <td>
+                            <td class="text-right">
+                              <a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$parent->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a>
                               <a class="btn btn-sm btn-info" href="{{ route('getLinkedStudent',$parent->id) }}"><i class="fa fa-user" aria-hidden="true"></i> Student</a>
+                              <a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                             </td>
-                            <td><a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td>
+                      
                         </tr>
                          {{-- student modal relate to the row --}}
                         {{-- <div class="modal fade" id="{{ 'student'.$parent->id }}" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
@@ -129,6 +128,7 @@
                     @endforeach
                 </tbody>
               </table>
+            {{ $parents->links() }}
         </div>
     </div>
     

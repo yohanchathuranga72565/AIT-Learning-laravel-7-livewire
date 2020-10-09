@@ -21,7 +21,10 @@
                     <div class="card-body text-secondary">
                         <p>Description</p>
                         <pre>Capter : {{ $file->capter }}<br>Title  : {{ $file->title }}</pre>
-                        <iframe src="{{asset('storage/resources/'.$file->file)}}" frameborder="0" width="100%" height="500"></iframe>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{asset('storage/resources/'.$file->file)}}" frameborder="0" width="100%" height="500" allowfullscreen></iframe>    
+                        <div>
+                            
                     </div>
                 </div>
             </div>

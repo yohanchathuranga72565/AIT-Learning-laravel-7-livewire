@@ -1,43 +1,47 @@
+
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container my-2">
         <div class="row justify-content-center my-2">
-          <h2>Student Accounts</h2>
+          <h2>View Your Student Lists</h2>
+          {{-- <div class="col-12 mt-3">
+            @if(session()->has('success'))
+                <div class="alert alert-success" role="alert">  
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+          </div> --}}
         </div>
-        <div class="row justify-content-center my-2">
-          <div class="col-2">
-            <a href="{{route('student.create')}}" class="btn btn-sm btn-primary"><i class="fa fa-sm fa-user-plus" aria-hidden="true"></i> Create new account</a>
-          </div>
-          <div class="col-10">
-              {{-- can write something --}}
-          </div>
-        </div>
+
         <div class="row justify-content-center">
-            <table class="table table-hover table-sm table-responsive-lg">
+            <table class="table table-hover table-sm table-responsive-sm">
                 <thead class="thead-dark">
-                  <tr class="text-center">
+                  <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Action</th>
-
                   </tr>
                 </thead>
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <th scope="row">{{ $student->id }}</th>
-                            <td>{{ $student->name }}</td>
-                            <td>{{ $student->email }}</td>
-                            <td>{{ $student->grade->grade }}</td>
+                            <td scope="row">{{ $student->id }}</td>
+                            <td scope="row">{{ $student->name }}</td>
+                            <td scope="row">{{ $student->email }}</td>
+                            <td scope="row">{{ $student->grade->grade }}</td>
                             <td class="text-right">
-                              <a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$student->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a>
-                              <a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                <div >
+                                    <a class="btn btn-sm btn-primary mt-1" href="#" >Attendance</a>
+                                    <a class="btn btn-sm btn-primary mt-1" href="#" > Exam Report</a>
+                                    <a class="btn btn-sm btn-info mt-1" href="#" data-toggle="modal" data-target="{{ '#profile'.$student->id }}"> View</a>
+                                    {{-- <a class="btn btn-sm btn-danger mt-1" href="#" onclick="return confirm('Are you sure?')"> Delete</a> --}}
+                                </div>
                             </td>
                         </tr>
-
                         {{-- view modal relate to the row --}}
                         <div class="modal fade" id="{{ 'profile'.$student->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -87,11 +91,11 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div>
                     @endforeach
                 </tbody>
-              </table>
-
+            </table>
+            {{ $students->links() }}
         </div>
     </div>
     

@@ -56,31 +56,43 @@
             </div>
         </div> --}}
         <div class="row justify-content-center">
-            <table class="table table-hover table-sm table-responsive-sm">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Grade</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    {{-- <th scope="col"></th> --}}
-                  </tr>
-                </thead>
-                <tbody>
-                    @foreach ($grades as $grade)
-                        <tr>
-                            <td scope="row">{{ $grade->grade }}</td>
-
-                            <td><a class="btn btn-sm btn-primary" href="{{ route('resourcesUploadForm',$grade->id) }}" ><i class="fa fa-sm fa-user" aria-hidden="true"></i> Upload file</a></td>
-                            <td><a class="btn btn-sm btn-primary" href="{{ route('viewResources',[$grade->id,auth()->user()->teacher->id]) }}" ><i class="fa fa-sm fa-user" aria-hidden="true"></i> View resources</a></td>
-                            {{-- <td>
-                              <a class="btn btn-sm btn-info" href="{{ route('getLinkedStudent',$parent->id) }}"><i class="fa fa-user" aria-hidden="true"></i> Student</a>
-                            </td> --}}
-                            <td><a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-              </table>
+            <div class="col-md-8">
+                <table class="table table-hover table-sm table-responsive-sm">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Grade</th>
+                        <th scope="col"></th>
+                        {{-- <th scope="col"></th>
+                        <th scope="col"></th> --}}
+                        {{-- <th scope="col"></th> --}}
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($grades as $grade)
+                            <tr>
+                                <td scope="row">{{ $grade->grade }}</td>
+    
+                                <td class="text-right">
+                                    <div>
+                                        <a class="btn btn-sm btn-primary" href="{{ route('resourcesUploadForm',$grade->id) }}" ><i class="fa fa-sm fa-user" aria-hidden="true"></i> Upload file</a>
+                                        <a class="btn btn-sm btn-primary" href="{{ route('viewResources',[$grade->id,auth()->user()->teacher->id]) }}" ><i class="fa fa-sm fa-user" aria-hidden="true"></i> View resources</a>
+                                        {{-- <a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a> --}}
+                                    </div>  
+                                </td>
+                                
+                                {{-- <td>
+                                  <a class="btn btn-sm btn-info" href="{{ route('getLinkedStudent',$parent->id) }}"><i class="fa fa-user" aria-hidden="true"></i> Student</a>
+                                </td> --}}
+                                
+                            </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
+                  
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {{ $grades->links() }}
         </div>
     </div>
     
