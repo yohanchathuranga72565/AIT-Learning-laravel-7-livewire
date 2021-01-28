@@ -35,5 +35,10 @@ class Teacher extends Model
         return $this->hasMany('App\Resource');
     }
 
+    public function course()
+    {
+        return $this->hasMany('App\Course');
+    }
+
     
 }

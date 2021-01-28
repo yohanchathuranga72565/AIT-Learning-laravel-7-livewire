@@ -69,7 +69,7 @@
       </ul>
 
       <!-- SEARCH FORM -->
-      <form class="form-inline ml-3">
+      {{-- <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
           <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -78,16 +78,16 @@
             </button>
           </div>
         </div>
-      </form>
+      </form> --}}
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages -->
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
+          {{-- <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
-          </a>
+          </a> --}}
         </li>
         <li class="nav-item dropdown">
           <div id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -277,6 +277,12 @@
                       <p>Comment Section</p>
                     </a>
                   </li>
+                  <li class='nav-item'>
+                    <a href="{{ route('showCourse') }}" class="nav-link">
+                      <i class="nav-icon fa fa-book" aria-hidden="true"></i>
+                      <p>Show Courses</p>
+                    </a>
+                  </li>
                 @endif
                 @if (Auth::user()->isA('teacher'))
                   <li class='nav-item'>
@@ -297,6 +303,13 @@
                       <p>Resources</p>
                     </a>
                   </li>
+                  <li class='nav-item'>
+                    <a href="{{ route('quizes') }}" class="nav-link">
+                      <i class="nav-icon fa fa-book" aria-hidden="true"></i>
+                      <p>Quizes</p>
+                    </a>
+                  </li>
+                  
                 @endif
                 @if (Auth::user()->isA('student'))
                   <li class='nav-item'>

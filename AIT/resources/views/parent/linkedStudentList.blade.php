@@ -55,7 +55,7 @@
                                                 <h5 class="card-title my-2">Address</h5>
                                                 <p class="card-text"><input type="text" class="form-control" value="{{ $student->address }}" readonly></p>
                                                 <h5 class="card-title my-2">Grade</h5>
-                                                <p class="card-text"><input type="text" class="form-control" value="{{ $student->grade }}" readonly></p>
+                                                <p class="card-text"><input type="text" class="form-control" value="{{ $student->grade->grade }}" readonly></p>
                                                 <h5 class="card-title my-2">Birth date</h5>
                                                 <p class="card-text"><input type="text" class="form-control" value="{{ $student->dob }}" readonly></p>
                                                 <h5 class="card-title my-2">Gender</h5>

@@ -8,7 +8,7 @@
         </div>
         <div class="row justify-content-center my-2">
           <div class="col-6">
-            <a href="#" data-toggle="modal" data-target="#addSubject" class="btn btn-sm btn-primary"><i class="fa fa-sm fa-book" aria-hidden="true"></i> Get Permission for SUbjects</a>
+            <a href="#" data-toggle="modal" data-target="#addSubject" class="btn btn-sm btn-primary"><i class="fa fa-sm fa-book" aria-hidden="true"></i> Get Permission for Subjects</a>
           </div>
           <div class="col-6">
               {{-- can write something --}}

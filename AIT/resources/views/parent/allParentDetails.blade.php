@@ -128,7 +128,7 @@
                     @endforeach
                 </tbody>
               </table>
-            {{ $parents->links() }}
+              {{ $parents->links() }}
         </div>
     </div>
     

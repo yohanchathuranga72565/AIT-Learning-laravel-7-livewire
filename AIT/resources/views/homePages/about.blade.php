@@ -59,13 +59,18 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="single_instructor">
                             <div class="author">
-                                <img src="{{asset('storage/profileImages/'.$teacher->profile_image)}}" alt="" width ='163' height='163'>
+                                @if ($teacher->profile_image)
+                                    <img src="{{asset('storage/profileImages/'.$teacher->profile_image)}}" alt="" width ='163' height='163'>
+                                @else
+                                    <img src="{{asset('storage/profileImages/profile.png')}}" alt="" width ='163' height='163'>
+                                @endif
+                                
                             </div>
                             <div class="author_decs">
-                                <h4>Ethel Davis</h4>
-                                <p class="profession">Sr. Faculty Data Science</p>
-                                <p>If you are looking at blank cassettes on the web, you may be very confused at the
-                                    difference in price.</p>
+                                <h4>{{ $teacher->name }}</h4>
+                                <p class="profession">{{ $teacher->subject->name }}</p>
+                                {{-- <p>If you are looking at blank cassettes on the web, you may be very confused at the
+                                    difference in price.</p> --}}
                                 <div class="social_icons">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>

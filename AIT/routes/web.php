@@ -45,6 +45,19 @@ Route::get('/editResourcesFile/{id}','Teacher\TeacherController@editResourcesFil
 Route::post('/editResourcesFile/{id}','Teacher\TeacherController@editResourcesFile')->name('editResourcesFile');
 Route::get('/deleteResources/{id}','Teacher\TeacherController@deleteResources')->name('deleteResources');
 Route::get('/gradeStudent/{id}','Teacher\TeacherController@showGradeStudentList')->name('gradeStudent');
+Route::get('/quizes','Teacher\TeacherController@quizes')->name('quizes');
+Route::get('/showCourses','Teacher\TeacherController@showCreateCoursePage')->name('showCourse');
+Route::get('/createCourses','Teacher\TeacherController@showCreateCourseform')->name('createCourse');
+Route::post('/addCourse','Teacher\TeacherController@addCourses')->name('addCourses');
+Route::get('/addCourseContentForm/{id}','Teacher\TeacherController@addCourseContentForm')->name('addCourseContent');
+Route::post('/saveCourseContent/{id}','Teacher\TeacherController@saveCourseContent')->name('saveCourseContent');
+Route::get('/showCourseContent/{id}','Teacher\TeacherController@showCourseContent')->name('showCourseContent');
+Route::get('/viewCourseEpisoid/{id}','Teacher\TeacherController@viewCourseEpisoid')->name('viewCourseEpisoid');
+Route::get('/deleteCourseEpisoid/{id}','Teacher\TeacherController@deleteCourseEpisoid')->name('deleteCourseEpisoid');
+Route::get('/coursePayment/{id}','Teacher\TeacherController@coursePayment')->name('coursePayment');
+Route::get('/saveCoursePayment/{id}','Teacher\TeacherController@saveCoursePayment')->name('saveCoursePayment');
+Route::get('/publishCourse/{id}','Teacher\TeacherController@publishCourse')->name('publishCourse');
+
 
 
 Route::resource('student', 'Student\StudentController');

@@ -90,7 +90,7 @@
 			</div>
 			<div class="row">
 				<!-- single course -->
-				<div class="col-lg-3 col-md-6">
+				{{-- <div class="col-lg-3 col-md-6">
 					<div class="single_course">
 						<div class="course_head overlay">
 							<img class="img-fluid w-100" src="{{asset('homePages/img/courses/trainer1.jpg')}}" alt="">
@@ -122,9 +122,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- single course -->
-				<div class="col-lg-3 col-md-6">
+				{{-- <div class="col-lg-3 col-md-6">
 					<div class="single_course">
 						<div class="course_head overlay">
 							<img class="img-fluid w-100" src="{{asset('homePages/img/courses/trainer1.jpg')}}" alt="">
@@ -156,9 +156,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- single course -->
-				<div class="col-lg-3 col-md-6">
+				{{-- <div class="col-lg-3 col-md-6">
 					<div class="single_course">
 						<div class="course_head overlay">
 							<img class="img-fluid w-100" src="{{asset('homePages/img/courses/trainer1.jpg')}}" alt="">
@@ -190,9 +190,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<!-- single course -->
-				<div class="col-lg-3 col-md-6">
+				{{-- <div class="col-lg-3 col-md-6">
 					<div class="single_course">
 						<div class="course_head overlay">
 							<img class="img-fluid w-100" src="{{asset('homePages/img/courses/trainer1.jpg')}}" alt="">
@@ -224,15 +224,15 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
             </div>
-            <div class="container">
+            {{-- <div class="container">
                 <div class="row">
                     <div class="col text-right">
                         <a href="#" class="primary-btn text-uppercase">Explore Courses</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

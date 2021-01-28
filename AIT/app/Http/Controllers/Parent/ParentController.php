@@ -177,7 +177,7 @@ class ParentController extends Controller
         // $parents = Parent_::all();
         $parents = [];
         if(auth()->user()->isA('administrator')){
-            $parents = Parent_::all();
+            $parents = Parent_::paginate(10);
         }
         else if(auth()->user()->isA('teacher')){
             $teacher = Teacher::find(auth()->user()->teacher->id);
@@ -191,6 +191,7 @@ class ParentController extends Controller
             }
             $parents = Parent_::whereIn('id',$parent_id)->paginate(10);
         } 
+      
         return view('parent.allParentDetails')->with(['parents'=>$parents]);
     }
 

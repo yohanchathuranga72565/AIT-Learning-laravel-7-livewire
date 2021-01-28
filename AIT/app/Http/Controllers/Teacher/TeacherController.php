@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Teacher;
+
+use App\Course;
+use App\CourseContent;
 use App\User;
 use App\Grade;
 use App\Student;
@@ -9,6 +12,7 @@ use App\Teacher;
 use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +21,7 @@ class TeacherController extends Controller
     public function __construct()
     {
         $this->middleware('role:teacher|administrator',['except' => [
-            'showResources','viewResources'
+            'showResources','viewResources','showCreateCoursePage','showCourseContent','viewCourseEpisoid','coursePayment','saveCoursePayment'
         ]]);
     }
 
@@ -298,6 +302,10 @@ class TeacherController extends Controller
         return redirect()->back()->with('success','Resource deleted successfully.');
     }
 
+    public function quizes(){
+        return view('teacher.quizes');
+    }
+
 
     public function addClasses(Request $request){
         $request->validate(['selected'=> 'required']);
@@ -319,20 +327,125 @@ class TeacherController extends Controller
         }
         
         $students = Student::where('grade_id',$grade_id)->whereIn('id',$student_id)->paginate(10);
-        // return $student_grades;
-        // $student = array();
-        // foreach($student_teachers as $student_teacher){
-        //     foreach($student_grades as $student_grade){
-        //         if($student_teacher->id == $student_grade->id){
-        //             $student[]=$student_grade;
-        //             break;
-        //         }
-        //     }
-
-        // }
-        // $students = $student;
-
         return view('teacher.teacher-student')->with(['students'=>$students]);
+    }
+
+    public function showCreateCoursePage(){
+        if(auth()->user()->isA("teacher")){
+            $courses = Course::where('teacher_id',auth()->user()->teacher->id)->get();
+            return view('teacher.showCourses')->with(['courses'=>$courses]);
+        }
+        else if(auth()->user()->isA("student")){
+            $courses = Course::all();
+            return view('teacher.showCourses')->with(['courses'=>$courses]);
+        }
+       
+    }
+
+    public function showCreateCourseForm(){
+        return view('teacher.createCourse');
+    }
+
+    public function addCourses(Request $request){
+        $filename='';
+        // $file_extension='';
+
+        $request->validate([
+            'title'  => ['required','max:255'],
+            'category'  => ['required','max:255'],
+            'image' => ['required'],
+            'price' => ['required','numeric']
+        ]);
+
+
+
+        if($request->image){
+            $filename = auth()->user()->teacher->id.'-'.$request->image->getClientOriginalname();
+            $request->image->storeAs('public/course_image',$filename);
+        }
+
+        $newCourse = Course::create(['teacher_id'=>auth()->user()->teacher->id,'category'=>$request->category, 'title'=> $request->title, 'image'=> $filename, 'price'=>$request->price, 'publish'=>0]);
+        $filename='';
+        return redirect(route("showCourse"))->with('success','New Courses Added.');
+    }
+
+    public function publishCourse($id){
+        $dataSet = Course::find($id);
+
+        if($dataSet['publish']==0){
+            $dataSet->update(
+                [
+                    'publish' => 1
+                ]
+                );
+        }
+        elseif($dataSet['publish']==1){
+            $dataSet->update(
+                [
+                    'publish' => 0
+                ]
+                );
+        }
+      
+       
+        return redirect(route('showCourse'));
+    }
+
+    public function addCourseContentForm($id){
+        return view('teacher.addCourseContent')->with(['id'=>$id]);
+    }
+
+    public function saveCourseContent($id, Request $request){
+        $filename='';
+        // $file_extension='';
+
+        $request->validate([
+            'title'  => ['required','max:255'],
+            'file' => ['required']
+        ]);
+
+
+
+        if($request->file){
+            $filename = auth()->user()->teacher->id.'-'.$id.'-'.$request->file->getClientOriginalname();
+            $request->file->storeAs('public/course_resources',$filename);
+        }
+
+        $newCourseContent= CourseContent::create(['course_id'=>$id, 'title'=> $request->title, 'file'=> $filename]);
+        $filename='';
+
+
+        return redirect(route('showCourse')) ;
+    }
+
+    public function showCourseContent($id){
+        $contents  = CourseContent::where('course_id',$id)->get();
+        return view('teacher.showCourseContent')->with(["contents"=>$contents]);
+    }
+
+    public function viewCourseEpisoid($id){
+        $file = CourseContent::find($id);
+        return view('teacher.viewCourseCapter')->with(['file'=>$file]);
+    }
+
+    public function deleteCourseEpisoid($id){
+        $resource = CourseContent::find($id);
+        Storage::delete('/public/course_resources/'.$resource->file);
+        CourseContent::where('id',$id)->delete();
+
+        return redirect()->back()->with('success','Resource deleted successfully.');
+    }
+
+    public function coursePayment($id){
+        $course  = Course::where('id',$id)->get();
+        // return $course;
+        return view('teacher.coursePayment')->with(['course'=>$course]);
+    }
+
+    public function saveCoursePayment($id){
+        $course= Course::where('id',$id)->get();
+        $payment = Payment::create(['amount'=>$course[0]['price'],'student_id'=>auth()->user()->student->id,'course_id'=>$id]);
+        return redirect(route('showCourse'))->with('success','Payement successfully.');
     }
 
 }
