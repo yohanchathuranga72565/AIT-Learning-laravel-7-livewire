@@ -22,4 +22,9 @@ class Grade extends Model
     {
         return $this->hasMany('App\Resource');
     }
+
+    public function assignment()
+    {
+        return $this->hasMany('App\Assignment');
+    }
 }

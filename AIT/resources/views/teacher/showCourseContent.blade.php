@@ -21,7 +21,7 @@
                   <tr>
                     <th scope="col">Title</th>
                     <th scope="col">File Type</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>

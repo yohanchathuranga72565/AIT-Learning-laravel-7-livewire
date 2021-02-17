@@ -40,5 +40,10 @@ class Teacher extends Model
         return $this->hasMany('App\Course');
     }
 
+    public function assignment()
+    {
+        return $this->hasMany('App\Assignment');
+    }
+
     
 }

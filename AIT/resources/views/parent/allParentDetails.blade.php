@@ -22,7 +22,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     {{-- <th scope="col">SUbject</th> --}}
-                    <th scope="col">Action</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>

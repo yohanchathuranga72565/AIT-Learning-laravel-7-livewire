@@ -8,7 +8,7 @@
   {{-- jquery --}}
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="_token" content="{{ csrf_token() }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('adminPanel/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
@@ -31,6 +31,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <link rel="stylesheet" href="{{asset('css/app.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" integrity="sha512-3g+prZHHfmnvE1HBLwUnVuunaPOob7dpksI7/v6UnF/rnKGwHf/GdEq9K7iEN7qTtW+S0iivTcGpeTBqqB04wA==" crossorigin="anonymous" />
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -304,11 +305,12 @@
                     </a>
                   </li>
                   <li class='nav-item'>
-                    <a href="{{ route('quizes') }}" class="nav-link">
+                    <a href="{{ route('assignmentsShowClasses') }}" class="nav-link">
                       <i class="nav-icon fa fa-book" aria-hidden="true"></i>
-                      <p>Quizes</p>
+                      <p>Assignments</p>
                     </a>
                   </li>
+                 
                   
                 @endif
                 @if (Auth::user()->isA('student'))
@@ -390,6 +392,7 @@
 {{-- jquery ui --}}
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
 <script>
   $( function() {
     $( "#dob" ).datepicker({
@@ -427,8 +430,28 @@
       changeYear: true,
       yearRange: "1970:2030",
     });
+
+    $( "#dueDate" ).datepicker({
+      minDate:new Date(),
+      showAnim:'drop',
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1970:2030",
+    });
+
+    $( "#dueDate1" ).datepicker({
+      minDate:new Date(),
+      showAnim:'drop',
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1970:2030",
+    });
   } );
 </script>
+@yield('script')
+
 @livewireScripts
 
 

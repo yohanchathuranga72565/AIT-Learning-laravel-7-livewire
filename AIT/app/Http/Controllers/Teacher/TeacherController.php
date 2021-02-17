@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Assignment;
+use App\AssignmentAnswer;
 use App\Course;
 use App\CourseContent;
 use App\User;
@@ -12,9 +14,12 @@ use App\Teacher;
 use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Parent_;
 use App\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use ZipArchive;
+use File;
 
 class TeacherController extends Controller
 {
@@ -33,7 +38,10 @@ class TeacherController extends Controller
     public function index()
     {
         if(Auth::user()->isA('teacher')){
-            return view('teacher.index');
+            $student = count(Student::all());
+            $parent = count(Parent_::all());
+            $teacher = count(Teacher::all());
+            return view('teacher.index')->with(['student'=>$student,'parent'=>$parent,'teacher'=>$teacher]);
         }
         else{
             return redirect(route('login'));
@@ -442,10 +450,142 @@ class TeacherController extends Controller
         return view('teacher.coursePayment')->with(['course'=>$course]);
     }
 
-    public function saveCoursePayment($id){
-        $course= Course::where('id',$id)->get();
-        $payment = Payment::create(['amount'=>$course[0]['price'],'student_id'=>auth()->user()->student->id,'course_id'=>$id]);
-        return redirect(route('showCourse'))->with('success','Payement successfully.');
+    // public function saveCoursePayment($id){
+    //     $course= Course::where('id',$id)->get();
+    //     $payment = Payment::create(['amount'=>$course[0]['price'],'student_id'=>auth()->user()->student->id,'course_id'=>$id]);
+    //     return redirect(route('showCourse'))->with('success','Payement successfully.');
+    // }
+
+    public function assignmentsShowClasses(){
+        $teacher = Teacher::find(auth()->user()->teacher->id);
+        $teacher_grades = $teacher->grade()->paginate(10);
+        return view('teacher.assignment')->with(['grades'=> $teacher_grades]);
+    }
+
+    public function assignmentCreatedForm($id){
+
+        return view('teacher.assignmentsCreatedForm')->with(['grade_id'=> $id]);
+    }
+
+    public function createAssingnment($gid, Request $request){
+        $filename='';
+        // $file_extension='';
+
+        $request->validate([
+            'description' => ['required','max:255'],
+            'title'  => ['required','max:255'],
+            'file' => ['required']
+        ]);
+
+        $extension = strtolower($request->file->extension());
+
+        if($extension != 'pdf'){
+            return redirect()->back()->with('warning','Please select a pdf file.');
+        }
+
+
+
+
+        if($request->file){
+            $filename = auth()->user()->teacher->id.$gid.'-'.$request->file->getClientOriginalname();
+            $request->file->storeAs('public/assignments',$filename);
+        }
+
+        $assignment = Assignment::create(['teacher_id'=>auth()->user()->teacher->id,'grade_id'=>$gid,'title'=>$request->title, 'due_date'=> $request->dueDate, 'file'=> $filename,'description'=>$request->description, 'publish'=>0]);
+        $filename='';
+        return redirect()->back()->with('success','New Assignment Created.');
+
+    }
+
+    public function viewSubmissions($grade,$teacher){
+        $assignments = Assignment::where('grade_id',$grade)->where('teacher_id',$teacher)->paginate(10);
+        return view('teacher.viewSubmission')->with(['assignments'=> $assignments]);
+    }
+
+    public function publishLink($aid){
+        $dataSet = Assignment::find($aid);
+        if($dataSet['publish']==0){
+            $dataSet->update(
+                [
+                    'publish' => 1
+                ]
+                );
+        }
+        elseif($dataSet['publish']==1){
+            $dataSet->update(
+                [
+                    'publish' => 0
+                ]
+                );
+        }
+        return redirect(route('viewSubmissions',[$dataSet['grade_id'],$dataSet['teacher_id']]));
+    }
+
+    public function allSubmission($aid){
+        $submissions = AssignmentAnswer::where('assignment_id',$aid)->get();
+        return view('teacher.assignmentSubmission')->with(['submissions'=>$submissions,'aid'=>$aid]);
+    }
+
+    public function downloadAllSubmissions($aid){
+        $assignment = Assignment::find($aid);
+        $submissions = AssignmentAnswer::where('assignment_id',$aid)->get();
+        $zip = new ZipArchive;
+        $filename = 'assignment('.$assignment['title'].').zip';
+        if($zip->open(public_path($filename),ZipArchive::CREATE)==TRUE){
+            $files = File::files(public_path('storage/assignmentAnswer'));
+            foreach($files as $key=> $value){
+                $relativeName = basename($value);
+                foreach($submissions as $submission){
+                    if($relativeName == $submission['file']){
+                        $zip->addFile($value,$relativeName);
+                    }
+                }
+            }
+            $zip->close();
+            return response()->download(public_path($filename));
+        }
+
+    }
+
+    public function downloadOneSubmission($sid){
+        $submissions = AssignmentAnswer::where('id',$sid)->get();
+        $zip = new ZipArchive;
+        $filename = '('.$submissions[0]->student->name.').zip';
+        if($zip->open(public_path($filename),ZipArchive::CREATE)==TRUE){
+            $files = File::files(public_path('storage/assignmentAnswer'));
+            foreach($files as $key=> $value){
+                $relativeName = basename($value);
+                foreach($submissions as $submission){
+                    if($relativeName == $submission['file']){
+                        $zip->addFile($value,$relativeName);
+                        break;
+                    }
+                }
+            }
+            $zip->close();
+            return response()->download(public_path($filename));
+        }
+
+        
+    }
+
+    public function editAssignmentForm($aid){
+        $assignment = Assignment::find($aid);
+        return view('teacher.editAssignmentForm')->with(['assignment'=>$assignment]);
+    }
+
+    public function editAssignment(Request $request,$aid){
+       
+
+        $dataSet = Assignment::find($aid);
+
+        $dataSet->update(
+             [
+                 'due_date' => $request['dueDate1']
+             ]
+             );
+
+             return redirect()->back()->with('success','Due date changed.');
     }
 
 }

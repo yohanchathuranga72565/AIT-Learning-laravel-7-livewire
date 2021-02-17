@@ -81,7 +81,8 @@
                             <td scope="row">{{ $subjects->name }}</td>
                             <td scope="row">{{ $teacher->name }}</td>
 
-                            <td><a class="btn btn-sm btn-primary" href="{{ route('viewResources',[auth()->user()->student->grade,$teacher->id]) }}" ><i class="fa fa-sm fa-book" aria-hidden="true"></i> Get Resources</a></td>
+                            <td class="text-right"><a class="btn btn-sm btn-primary" href="{{ route('viewResources',[auth()->user()->student->grade,$teacher->id]) }}" ><i class="fa fa-sm fa-book" aria-hidden="true"></i> Get Resources</a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('assignments',$teacher->id) }}" ><i class="fa fa-sm fa-book" aria-hidden="true"></i> Assignments</a></td>
                             {{-- <td><a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td> --}}
                         </tr>
                         @endif

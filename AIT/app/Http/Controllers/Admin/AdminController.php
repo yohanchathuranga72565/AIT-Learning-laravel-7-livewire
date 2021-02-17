@@ -5,6 +5,9 @@ use App\User;
 use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Parent_;
+use App\Student;
+use App\Teacher;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -21,7 +24,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $user = count(User::all());
+        $student = count(Student::all());
+        $parent = count(Parent_::all());
+        $teacher = count(Teacher::all());
+        return view('admin.index')->with(['user'=>$user,'student'=>$student,'parent'=>$parent,'teacher'=>$teacher]);
     }
 
     /**

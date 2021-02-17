@@ -28,6 +28,6 @@ class GetSubjectPermission extends Mailable
      */
     public function build()
     {
-        return $this->subject("AIT institute subject permission")->markdown('emails.get-subject-permission');
+        return $this->from('aitinstitute1234@gmail.com')->subject("AIT institute subject permission")->markdown('emails.get-subject-permission');
     }
 }

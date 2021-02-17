@@ -22,7 +22,7 @@
                     <th scope="col">Email</th>
                     {{-- <th scope="col">SUbject</th> --}}
                     <th scope="col"></th>
-                    <th scope="col"></th>
+                
                   </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,9 @@
                             <td>{{ $teacher->name }}</td>
                             <td>{{ $teacher->email }}</td>
                             {{-- <td>{{ $student->subject }}</td> --}}
-                            <td><a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$teacher->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a></td>
-                            <td><a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td>
+                            <td class="text-right">
+                            <a class="btn btn-sm btn-info" href="#" data-toggle="modal" data-target="{{ '#profile'.$teacher->id }}" ><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                            <a class="btn btn-sm btn-danger" href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></td>
                         </tr>
 
                         {{-- view modal relate to the row --}}

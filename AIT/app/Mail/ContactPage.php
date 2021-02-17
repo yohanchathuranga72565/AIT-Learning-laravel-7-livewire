@@ -29,6 +29,6 @@ class ContactPage extends Mailable
      */
     public function build()
     {
-        return $this->subject("AIT institute Contact form")->view('emails.contactPage');
+        return $this->from('aitinstitute1234@gmail.com')->subject("AIT institute Contact form")->view('emails.contactPage');
     }
 }

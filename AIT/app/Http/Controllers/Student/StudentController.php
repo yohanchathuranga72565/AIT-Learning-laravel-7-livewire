@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Assignment;
+use App\AssignmentAnswer;
 use App\User;
 use App\Grade;
 use App\Student;
@@ -10,6 +12,7 @@ use App\Resource;
 use Illuminate\Http\Request;
 use App\Mail\GetSubjectPermission;
 use App\Http\Controllers\Controller;
+use App\Parent_;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +31,11 @@ class StudentController extends Controller
     public function index()
     {
         if(Auth::user()->isA('student')){
-            return view('student.index');
+            $user = count(User::all());
+            $student = count(Student::all());
+            $parent = count(Parent_::all());
+            $teacher = count(Teacher::all());
+            return view('student.index')->with(['user'=>$user,'student'=>$student,'parent'=>$parent,'teacher'=>$teacher]);
         }
         else{
             return redirect(route('login'));
@@ -234,5 +241,51 @@ class StudentController extends Controller
         
     
         // return redirect()->back()->with('sentmail', 'Email has sent successfully');
+    }
+
+    public function assignments($tid){
+        $gid = auth()->user()->student->grade->id;
+        $assignments = Assignment::where('teacher_id',$tid)->where('grade_id',$gid)->get();
+        $uploaded = AssignmentAnswer::where('student_id',auth()->user()->student->id)->get();
+        return view('student.assignment')->with(['assignments'=>$assignments,'answers'=>$uploaded]);
+    }
+
+    public function assignmentView($file){
+        return view('student.assignmentView')->with(['file'=>$file]);
+    }
+
+    public function uploadAssignment($aid){
+        // $dname = AssignmentAnswer::where('assignment_id',$aid)->where('student_id',auth()->user()->student->id)->get('file');
+        // return $dname[0]['file'];
+        $assignment = Assignment::where('id',$aid)->get();
+        return view('student.assignmentsAnswer')->with(['assignment'=>$assignment]);
+    }
+
+    public function saveAssignment(Request $request , $aid){
+        // $image = $request->file('file');
+            $dname = AssignmentAnswer::where('assignment_id',$aid)->where('student_id',auth()->user()->student->id)->get('file');
+            if(isset($dname[0]['file'])){
+                $set = AssignmentAnswer::where('assignment_id',$aid)->where('student_id',auth()->user()->student->id)->delete();
+                Storage::delete('/public/assignmentAnswer/'.$dname[0]['file']);
+            }
+            
+            
+    
+            $filename = $aid.'-'.auth()->user()->student->id.'-'.$request->file->getClientOriginalname();
+            $request->file('file')->storeAs('public/assignmentAnswer',$filename);
+
+            $answer = AssignmentAnswer::create(['file'=>$filename, 'assignment_id' => $aid,'student_id'=>auth()->user()->student->id]);
+
+        return response()->json(['success'=>$filename]);
+    }
+
+    public function removeAssignmentInDropbox(Request $request, $aid){
+        $filename = $request->filename;
+        $filename = $aid.'-'.auth()->user()->student->id.'-'.$filename;
+        Storage::delete('/public/assignmentAnswer/'.$filename);
+        $assigment = AssignmentAnswer::where('file',$filename)->delete();
+       
+
+        return $filename;
     }
 }

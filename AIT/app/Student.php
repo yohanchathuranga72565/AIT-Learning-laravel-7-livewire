@@ -40,4 +40,9 @@ class Student extends Model
         return $this->hasMany('App\Payment');
     }
 
+    public function assignmentAnswer()
+    {
+        return $this->hasMany('App\AssignmentAnswer');
+    }
+
 }

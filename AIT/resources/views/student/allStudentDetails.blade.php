@@ -21,7 +21,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Grade</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"></th>
 
                   </tr>
                 </thead>

@@ -57,6 +57,16 @@ Route::get('/deleteCourseEpisoid/{id}','Teacher\TeacherController@deleteCourseEp
 Route::get('/coursePayment/{id}','Teacher\TeacherController@coursePayment')->name('coursePayment');
 Route::get('/saveCoursePayment/{id}','Teacher\TeacherController@saveCoursePayment')->name('saveCoursePayment');
 Route::get('/publishCourse/{id}','Teacher\TeacherController@publishCourse')->name('publishCourse');
+Route::get('/assignments','Teacher\TeacherController@assignmentsShowClasses')->name('assignmentsShowClasses');
+Route::get('/assignmentCreatedForm/{gid}','Teacher\TeacherController@assignmentCreatedForm')->name('assignmentCreatedForm');
+Route::post('/createAssingnment/{gid}','Teacher\TeacherController@createAssingnment')->name('createAssingnment');
+Route::get('/viewSubmissions/{grade}/{teacher}','Teacher\TeacherController@viewSubmissions')->name('viewSubmissions');
+Route::get('/publishLink/{aid}','Teacher\TeacherController@publishLink')->name('publishLink');
+Route::get('/submissions/{aid}','Teacher\TeacherController@allSubmission')->name('submission');
+Route::get('/downloadAllsubmissions/{aid}','Teacher\TeacherController@downloadAllSubmissions')->name('downloadAllSUbmissions');
+Route::get('/downloadOneSubmission/{sid}','Teacher\TeacherController@downloadOneSubmission')->name('downloadOneSubmission');
+Route::get('/editAssignmentForm/{aid}','Teacher\TeacherController@editAssignmentForm')->name('editAssignmentForm');
+Route::post('/editAssignment/{aid}','Teacher\TeacherController@editAssignment')->name('editAssignment');
 
 
 
@@ -65,6 +75,11 @@ Route::resource('student', 'Student\StudentController');
 Route::get('/allStudentDetails','Student\StudentController@getAllDetails')->name('studentGetAllDetails');
 Route::get('/subjects','Student\StudentController@showSubjects')->name('showSubjects');
 Route::post('/getPermisionSubject','Student\StudentController@getPermisionSubject')->name('getPermisionSubject');
+Route::get('/assignments/{tid}','Student\StudentController@assignments')->name('assignments');
+Route::get('/assignmentView/{file}','Student\StudentController@assignmentView')->name('assignmentView');
+Route::get('/uploadAssignment/{aid}','Student\StudentController@uploadAssignment')->name('uploadAssignment');
+Route::post('/uploadAssignment/{aid}','Student\StudentController@saveAssignment')->name('saveAssignment');
+Route::post('/deleteInDropbox/{aid}','Student\StudentController@removeAssignmentInDropbox')->name('deleteInDropbox');
 
 
 

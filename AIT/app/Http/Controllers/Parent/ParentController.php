@@ -25,7 +25,11 @@ class ParentController extends Controller
     public function index()
     {
         if(Auth::user()->isA('parent')){
-            return view('parent.index');
+            $user = count(User::all());
+            $student = count(Student::all());
+            $parent = count(Parent_::all());
+            $teacher = count(Teacher::all());
+            return view('parent.index')->with(['user'=>$user,'student'=>$student,'parent'=>$parent,'teacher'=>$teacher]);
         }
         else{
             return redirect(route('login'));

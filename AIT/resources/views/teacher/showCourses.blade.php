@@ -14,9 +14,33 @@
         </div>
         <div class="row justify-content-center my-2">
             <div class="col-md-8">
+                @php
+                        use App\Payment;
+                        use App\Course;
+                        use Illuminate\Http\Request;
+                        if(isset($_GET['order_id'])){
+                            $payments = Payment::where('course_id',$_GET['order_id'])->get('student_id');
+                            $flag = 0;
+                            foreach ($payments as $payment) {
+                                if ($payment['student_id'] == auth()->user()->student->id) {
+                                    $flag = 1;
+                                }
+                            }
+                            if($flag == 0){
+                                $course= Course::where('id',$_GET['order_id'])->get();
+                                $payment = Payment::create(['amount'=>$course[0]['price'],'student_id'=>auth()->user()->student->id,'course_id'=>$_GET['order_id']]);
+                                session()->flash('success', 'Payement successfully.');
+                            }
+                           
+                            // return redirect(route('showCourse'))->with('success','Payement successfully.');
+                        }
+                    @endphp
                 @if(session()->has('success'))
                     <div class="alert alert-success" role="alert">  
                         {{ session()->get('success') }}
+                        @php
+                           session()->forget('success');
+                        @endphp
                     </div>
                 @endif
                 <div class="col-6">
@@ -37,9 +61,10 @@
         <div class="container">
             <div>
                 <div class="row">
+                    
                     @if ($_GET)
                         {{-- {{ $_GET['order_id'] }} --}}
-                        <a href="{{ route("saveCoursePayment",$_GET['order_id']) }}" id='clicker'>
+                        {{-- <a href="{{ route("saveCoursePayment",$_GET['order_id']) }}" id='clicker'> --}}
                     @endif
                    
                     @foreach ($courses as $course)
@@ -58,6 +83,9 @@
                                 </div>
                 
                                 <div class="text-center">
+                                    <div class="m-2">
+                                        <h4>{{ $course->title }}</h4>
+                                    </div>
                                     <div class="mb-2">
                                         <span class="badge rounded-pill bg-secondary">{{ $course->price }} LKR</span>
                                         @if (Auth::user()->isA('student'))
@@ -118,6 +146,9 @@
                                     </div>
                     
                                     <div class="text-center">
+                                        <div class="m-2">
+                                            <h4>{{ $course->title }}</h4>
+                                        </div>
                                         <div class="mb-2">
                                             <span class="badge rounded-pill bg-secondary">{{ $course->price }} LKR</span>
                                             @if (Auth::user()->isA('student'))
